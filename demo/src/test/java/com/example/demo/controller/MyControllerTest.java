@@ -20,7 +20,7 @@ class MyControllerTests {
 	@Test
 	void submitString() throws Exception {
 		String input = "Hello World";
-		this.mockMvc.perform(post("/submit")
+		this.mockMvc.perform(post("/mycontroller/submit")
 			.content(input)
 			.contentType(MediaType.TEXT_PLAIN))
 			.andExpect(status().isOk())

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @RequestMapping
-public class RestController {
+public class MyController {
 	private static final Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 
 	@PostMapping("/submit")

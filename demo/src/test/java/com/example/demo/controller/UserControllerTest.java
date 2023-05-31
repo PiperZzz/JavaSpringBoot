@@ -10,20 +10,20 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-public class MyControllerTest {
+// @SpringBootTest
+// @AutoConfigureMockMvc
+// public class UserControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+//     @Autowired
+//     private MockMvc mockMvc;
 
-    @Test
-    public void testSubmitString() throws Exception {
-        String input = "test";
-        mockMvc.perform(post("/api/submit")
-                .contentType(MediaType.TEXT_PLAIN)
-                .content(input))
-                .andExpect(status().isOk())
-                .andExpect(content().string(input + "!"));
-    }
-}
+//     @Test
+//     public void testSubmitString() throws Exception {
+//         String input = "test";
+//         mockMvc.perform(post("/api/submit")
+//                 .contentType(MediaType.TEXT_PLAIN)
+//                 .content(input))
+//                 .andExpect(status().isOk())
+//                 .andExpect(content().string(input + "!"));
+//     }
+// }

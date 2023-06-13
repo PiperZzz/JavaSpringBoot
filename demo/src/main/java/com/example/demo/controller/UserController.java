@@ -11,33 +11,40 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+
+
+
+import com.example.demo.controller.dto.LoginRequest;
+import com.example.demo.exception.JwtAuthenticationException;
 
 import com.example.demo.model.User;
 import com.example.demo.model.UserResponse;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.service.JwtTokenProvider;
 import com.example.demo.service.UserService;
+import com.example.demo.controller.dto.LoginResponse;
+import com.example.demo.controller.dto.ErrorResponse;
 
 @RestController
 @RequestMapping("/api")
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    private final UserRepository userRepository;
     private final UserService userService;
+    private final JwtTokenProvider tokenProvider;
 
-    @Autowired
-    public UserController(UserRepository userRepository, UserService userService) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService, JwtTokenProvider tokenProvider) {
         this.userService = userService;
+        this.tokenProvider = tokenProvider;
     }
 
-    @PostMapping("/submit")
+    @PostMapping("/submit") //TO-DO rename to /register
     public @ResponseBody UserResponse submitUser(@RequestBody User user) {
         try {
             logger.info("Received User: {}", user.getUsername());
-            userRepository.save(user);
+            userService.save(user);
             return new UserResponse(true, "User has been added successfully");
         } catch (DataIntegrityViolationException  e) {
             logger.error("Error occurred while saving user: ", e);
@@ -61,6 +68,23 @@ public class UserController {
             }
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        try {
+            Authentication authentication = userService.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword());
+
+            // Generate JWT Token
+            String token = tokenProvider.generateToken(authentication);
+
+            // Return JWT Token as response
+            return ResponseEntity.ok(new LoginResponse(token));
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse("Invalid username or password"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("An error occurred during login"));
         }
     }
 }

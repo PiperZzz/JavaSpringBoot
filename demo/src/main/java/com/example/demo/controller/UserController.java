@@ -40,7 +40,7 @@ public class UserController {
         this.tokenProvider = tokenProvider;
     }
 
-    @PostMapping("/submit") //TO-DO rename to /register
+    @PostMapping("/register")
     public @ResponseBody UserResponse submitUser(@RequestBody User user) {
         try {
             logger.info("Received User: {}", user.getUsername());

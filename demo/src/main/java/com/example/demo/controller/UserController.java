@@ -15,17 +15,13 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 
-
-
-import com.example.demo.controller.dto.LoginRequest;
-import com.example.demo.exception.JwtAuthenticationException;
-
 import com.example.demo.model.User;
 import com.example.demo.model.UserResponse;
 import com.example.demo.service.JwtTokenProvider;
 import com.example.demo.service.UserService;
 import com.example.demo.controller.dto.LoginResponse;
 import com.example.demo.controller.dto.ErrorResponse;
+import com.example.demo.controller.dto.LoginRequest;
 
 @RestController
 @RequestMapping("/api")
@@ -76,10 +72,8 @@ public class UserController {
         try {
             Authentication authentication = userService.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword());
 
-            // Generate JWT Token
             String token = tokenProvider.generateToken(authentication);
 
-            // Return JWT Token as response
             return ResponseEntity.ok(new LoginResponse(token));
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse("Invalid username or password"));

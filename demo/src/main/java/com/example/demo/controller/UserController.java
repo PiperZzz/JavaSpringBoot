@@ -17,8 +17,8 @@ import org.springframework.security.core.AuthenticationException;
 
 import com.example.demo.model.User;
 import com.example.demo.model.UserResponse;
-import com.example.demo.service.JwtTokenProvider;
 import com.example.demo.service.UserService;
+import com.example.demo.util.JwtTokenProvider;
 import com.example.demo.controller.dto.LoginResponse;
 import com.example.demo.controller.dto.ErrorResponse;
 import com.example.demo.controller.dto.LoginRequest;

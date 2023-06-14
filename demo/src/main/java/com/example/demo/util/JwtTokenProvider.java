@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.util;
 
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;

@@ -17,6 +17,7 @@ import org.springframework.security.core.AuthenticationException;
 
 import com.example.demo.model.User;
 import com.example.demo.model.UserResponse;
+import com.example.demo.service.CustomUserDetailsService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.JwtTokenProvider;
 import com.example.demo.controller.dto.LoginResponse;
@@ -30,10 +31,12 @@ public class UserController {
 
     private final UserService userService;
     private final JwtTokenProvider tokenProvider;
+    private final CustomUserDetailsService userDetailsService;
 
-    public UserController(UserService userService, JwtTokenProvider tokenProvider) {
+    public UserController(UserService userService, JwtTokenProvider tokenProvider, CustomUserDetailsService userDetailsService) {
         this.userService = userService;
         this.tokenProvider = tokenProvider;
+        this.userDetailsService = userDetailsService;
     }
 
     @PostMapping("/register")
@@ -70,7 +73,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            Authentication authentication = userService.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword());
+            Authentication authentication = userDetailsService.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword());
 
             String token = tokenProvider.generateToken(authentication);
 

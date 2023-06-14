@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,8 +15,6 @@ import com.example.demo.model.User;
 public class UserService {
     private final UserRepository userRepository;
     private BCryptPasswordEncoder passwordEncoder;
-
-    @Autowired
     private AuthenticationManager authenticationManager;
 
     public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {

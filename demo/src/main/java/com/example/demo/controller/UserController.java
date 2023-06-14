@@ -76,8 +76,10 @@ public class UserController {
 
             return ResponseEntity.ok(new LoginResponse(token));
         } catch (AuthenticationException e) {
+            logger.info("invalid username or password");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse("Invalid username or password"));
         } catch (Exception e) {
+            logger.error("An error occurred during login: ", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("An error occurred during login"));
         }
     }

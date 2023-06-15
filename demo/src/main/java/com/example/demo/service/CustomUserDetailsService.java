@@ -19,8 +19,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final UserService userService;
     private AuthenticationManager authenticationManager;
 
-    public CustomUserDetailsService(UserService userService) {
+    public CustomUserDetailsService(UserService userService, AuthenticationManager authenticationManager) {
         this.userService = userService;
+        this.authenticationManager = authenticationManager;
     }
 
     @Override

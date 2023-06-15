@@ -30,14 +30,14 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
-    private final JwtTokenUtil JwtTokenUtil;
-    private final CustomUserDetailsService userDetailsService;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final CustomUserDetailsService customUserDetailsService;
 
-    public UserController(UserService userService, JwtTokenUtil tokenProvider,
-            CustomUserDetailsService userDetailsService) {
+    public UserController(UserService userService, JwtTokenUtil jwtTokenUtil,
+            CustomUserDetailsService customUserDetailsService) {
         this.userService = userService;
-        this.JwtTokenUtil = tokenProvider;
-        this.userDetailsService = userDetailsService;
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.customUserDetailsService = customUserDetailsService;
     }
 
     @PostMapping("/register")
@@ -74,10 +74,9 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            Authentication authentication = userDetailsService.authenticateUser(loginRequest.getUsername(),
-                    loginRequest.getPassword());
+            Authentication authentication = customUserDetailsService.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword());
 
-            String token = JwtTokenUtil.generateToken(authentication);
+            String token = jwtTokenUtil.generateToken(authentication);
 
             return ResponseEntity.ok(new LoginResponse(token));
         } catch (AuthenticationException e) {

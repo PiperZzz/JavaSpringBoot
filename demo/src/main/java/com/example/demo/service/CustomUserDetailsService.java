@@ -16,16 +16,16 @@ import com.example.demo.model.User;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserService UserService;
+    private final UserService userService;
     private AuthenticationManager authenticationManager;
 
-    public CustomUserDetailsService(UserService UserService) {
-        this.UserService = UserService;
+    public CustomUserDetailsService(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = UserService.findByUsername(username);
+        User user = userService.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
@@ -34,7 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     
     public Authentication authenticateUser(String username, String password) {
-        User user = UserService.findByUsernameAndPassword(username, password);
+        User user = userService.findByUsernameAndPassword(username, password);
 
         if (user != null) {
             

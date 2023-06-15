@@ -19,7 +19,7 @@ import com.example.demo.model.User;
 import com.example.demo.model.UserResponse;
 import com.example.demo.service.CustomUserDetailsService;
 import com.example.demo.service.UserService;
-import com.example.demo.util.JwtTokenProvider;
+import com.example.demo.util.JwtTokenUtil;
 import com.example.demo.controller.dto.LoginResponse;
 import com.example.demo.controller.dto.ErrorResponse;
 import com.example.demo.controller.dto.LoginRequest;
@@ -30,12 +30,13 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
-    private final JwtTokenProvider tokenProvider;
+    private final JwtTokenUtil JwtTokenUtil;
     private final CustomUserDetailsService userDetailsService;
 
-    public UserController(UserService userService, JwtTokenProvider tokenProvider, CustomUserDetailsService userDetailsService) {
+    public UserController(UserService userService, JwtTokenUtil tokenProvider,
+            CustomUserDetailsService userDetailsService) {
         this.userService = userService;
-        this.tokenProvider = tokenProvider;
+        this.JwtTokenUtil = tokenProvider;
         this.userDetailsService = userDetailsService;
     }
 
@@ -45,7 +46,7 @@ public class UserController {
             logger.info("Received User: {}", user.getUsername());
             userService.save(user);
             return new UserResponse(true, "User has been added successfully");
-        } catch (DataIntegrityViolationException  e) {
+        } catch (DataIntegrityViolationException e) {
             logger.error("Error occurred while saving user: ", e);
             return new UserResponse(false, "Username or email already exists.");
         } catch (Exception e) {
@@ -73,17 +74,20 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            Authentication authentication = userDetailsService.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword());
+            Authentication authentication = userDetailsService.authenticateUser(loginRequest.getUsername(),
+                    loginRequest.getPassword());
 
-            String token = tokenProvider.generateToken(authentication);
+            String token = JwtTokenUtil.generateToken(authentication);
 
             return ResponseEntity.ok(new LoginResponse(token));
         } catch (AuthenticationException e) {
             logger.info("invalid username or password");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse("Invalid username or password"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new ErrorResponse("Invalid username or password"));
         } catch (Exception e) {
             logger.error("An error occurred during login: ", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("An error occurred during login"));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("An error occurred during login"));
         }
     }
 }

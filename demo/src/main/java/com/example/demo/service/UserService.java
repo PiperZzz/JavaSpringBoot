@@ -44,7 +44,7 @@ public class UserService {
         User user = userRepository.findByUsername(username);
 
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            logger.info("User {} authenticated", user.getPassword());
+            logger.info("User {} authenticated", username);
             return user;
         }
 

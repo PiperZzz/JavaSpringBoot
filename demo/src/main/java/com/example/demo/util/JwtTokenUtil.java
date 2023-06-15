@@ -9,7 +9,7 @@ import java.util.Date;
 import com.example.demo.exception.JwtAuthenticationException;
 
 @Component
-public class JwtTokenProvider {
+public class JwtTokenUtil {
     @Value("${security.jwt.token.secret-key}")
     private String secretKey;
 

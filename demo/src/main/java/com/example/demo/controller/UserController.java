@@ -74,7 +74,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            Authentication authentication = customUserDetailsService.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword());
+            Authentication authentication = customUserDetailsService.authenticateUser(loginRequest);
 
             String token = jwtTokenUtil.generateToken(authentication);
 

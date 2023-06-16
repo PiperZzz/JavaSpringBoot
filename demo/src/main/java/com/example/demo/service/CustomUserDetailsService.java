@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,11 +12,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.controller.dto.LoginRequest;
 import com.example.demo.model.User;
 import com.example.demo.util.CustomAuthenticationManager;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
+    private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
 
     private final UserService userService;
     private CustomAuthenticationManager authenticationManager;
@@ -34,12 +38,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     
-    public Authentication authenticateUser(String username, String password) {
+    public Authentication authenticateUser(LoginRequest loginRequest) {
+        String username = loginRequest.getUsername();
+        String password = loginRequest.getPassword();
+        
         User user = userService.findByUsernameAndPassword(username, password);
 
         if (user != null) {
-            
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+
+            logger.info("Authentication: {}", authentication);
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 

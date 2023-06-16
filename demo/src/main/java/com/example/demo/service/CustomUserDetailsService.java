@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,14 +11,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.User;
+import com.example.demo.util.CustomAuthenticationManager;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserService userService;
-    private AuthenticationManager authenticationManager;
+    private CustomAuthenticationManager authenticationManager;
 
-    public CustomUserDetailsService(UserService userService, AuthenticationManager authenticationManager) {
+    public CustomUserDetailsService(UserService userService, CustomAuthenticationManager authenticationManager) {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
     }

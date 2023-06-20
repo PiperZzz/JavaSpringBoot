@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.controller.dto.LoginRequest;
 import com.example.demo.model.User;
-import com.example.demo.util.CustomAuthenticationManager;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

@@ -1,9 +1,5 @@
 package com.example.demo.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.UserRepository;
@@ -12,18 +8,13 @@ import com.example.demo.model.User;
 
 @Service
 public class UserService {
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
-
     private final UserRepository userRepository;
-    private BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     public void save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -38,16 +29,5 @@ public class UserService {
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
-    }
-
-    public User findByUsernameAndPassword(String username, String password) {
-        User user = userRepository.findByUsername(username);
-
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            logger.info("User {} authenticated", username);
-            return user;
-        }
-
-        return null;
     }
 }

@@ -12,14 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 
 import com.example.demo.model.User;
 import com.example.demo.model.UserResponse;
-import com.example.demo.service.CustomUserDetailsService;
 import com.example.demo.service.UserService;
-import com.example.demo.util.JwtTokenUtil;
 import com.example.demo.controller.dto.LoginResponse;
 import com.example.demo.controller.dto.ErrorResponse;
 import com.example.demo.controller.dto.LoginRequest;
@@ -30,14 +27,9 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
-    private final JwtTokenUtil jwtTokenUtil;
-    private final CustomUserDetailsService customUserDetailsService;
 
-    public UserController(UserService userService, JwtTokenUtil jwtTokenUtil,
-            CustomUserDetailsService customUserDetailsService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.jwtTokenUtil = jwtTokenUtil;
-        this.customUserDetailsService = customUserDetailsService;
     }
 
     @PostMapping("/register")
@@ -74,11 +66,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            Authentication authentication = customUserDetailsService.authenticateUser(loginRequest);
-
-            String token = jwtTokenUtil.generateToken(authentication);
-
-            return ResponseEntity.ok(new LoginResponse(token));
+            return ResponseEntity.ok(new LoginResponse("Login successful"));
         } catch (AuthenticationException e) {
             logger.info("invalid username or password");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)

@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.AuthenticationException;
-
 import com.example.demo.model.User;
 import com.example.demo.model.UserResponse;
 import com.example.demo.service.UserService;
@@ -63,7 +62,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
             return ResponseEntity.ok(new LoginResponse("Login successful"));

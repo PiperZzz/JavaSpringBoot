@@ -2,9 +2,16 @@ package com.example.demo.util;
 
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.example.demo.exception.JwtAuthenticationException;
 
@@ -31,6 +38,14 @@ public class JwtTokenUtil {
                 .compact();
     }
 
+    public String resolveToken(HttpServletRequest req) {
+        String bearerToken = req.getHeader("Authorization");
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }
+        return null;
+    }
+
     public boolean validateToken(String token) {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
@@ -38,5 +53,12 @@ public class JwtTokenUtil {
         } catch (JwtException | IllegalArgumentException e) {
             throw new JwtAuthenticationException("JWT token is expired or invalid");
         }
+    }
+
+    public Authentication getAuthentication(String token) {
+        Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+        String[] roles = claims.get("roles", String.class).split(",");
+        return new UsernamePasswordAuthenticationToken(claims.getSubject(), "",
+                Arrays.stream(roles).map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
     }
 }

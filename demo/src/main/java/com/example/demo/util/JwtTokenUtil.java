@@ -4,10 +4,12 @@ import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
@@ -25,10 +27,12 @@ public class JwtTokenUtil {
 
     public String generateToken(Authentication authentication) {
         String username = authentication.getName();
+        Collection<? extends GrantedAuthority> roles = authentication.getAuthorities();
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
         Claims claims = Jwts.claims().setSubject(username);
+        claims.put("roles", roles.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -53,6 +57,10 @@ public class JwtTokenUtil {
         } catch (JwtException | IllegalArgumentException e) {
             throw new JwtAuthenticationException("JWT token is expired or invalid");
         }
+    }
+
+    public String getUsername(String token) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
     public Authentication getAuthentication(String token) {

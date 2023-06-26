@@ -19,7 +19,7 @@ public class WebSecurityConfig {
     
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        logger.info("authenticationManager called");
+        logger.info("authenticationManager Bean created!");
         return authenticationConfiguration.getAuthenticationManager();
     }
 

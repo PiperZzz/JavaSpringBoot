@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -16,7 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.example.demo.service.CustomAuthenticationManager;
 import com.example.demo.util.JwtTokenUtil;
 
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
@@ -24,9 +24,9 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     @Autowired
     private final JwtTokenUtil jwtTokenUtil;
 
-    public JwtAuthenticationFilter(CustomAuthenticationManager customAuthenticationManager, JwtTokenUtil jwtTokenUtil) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil) {
         super(new AntPathRequestMatcher("/**"));
-        setAuthenticationManager(customAuthenticationManager);
+        setAuthenticationManager(authenticationManager);
         this.jwtTokenUtil = jwtTokenUtil;
     }
 

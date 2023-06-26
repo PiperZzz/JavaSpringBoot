@@ -9,12 +9,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+    Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
     
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        logger.info("authenticationManager called");
         return authenticationConfiguration.getAuthenticationManager();
     }
 

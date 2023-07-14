@@ -4,8 +4,10 @@
 # ENTRYPOINT ["java","-jar","/app.jar"]
 
 FROM maven:latest
-WORKDIR /app
-COPY . .
+ENV WS=spring-boot-web-server
+WORKDIR ${WS}
+COPY pom.xml /${WS}
+COPY src /${WS}/src
 RUN mvn clean install -DskipTests
 EXPOSE 8080
-CMD ["java", "-jar", "target/spring-boot-web-server-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "target/spring-boot-web-server-0.0.1-SNAPSHOT.jar"]

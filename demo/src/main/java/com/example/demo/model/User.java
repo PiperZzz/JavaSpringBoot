@@ -20,6 +20,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Wallet> wallets;
 
+    @OneToMany(mappedBy = "buyer")
+    private List<Trade> tradesAsBuyer;
+
+    @OneToMany(mappedBy = "seller")
+    private List<Trade> tradesAsSeller;
+
     private String name;
     private String email;
     private String password;

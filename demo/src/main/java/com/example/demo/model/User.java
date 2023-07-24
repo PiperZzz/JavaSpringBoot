@@ -21,10 +21,13 @@ public class User {
     private List<Wallet> wallets;
 
     @OneToMany(mappedBy = "buyer")
-    private List<Trade> tradesAsBuyer;
+    private List<Trade> buyerTrades;
 
     @OneToMany(mappedBy = "seller")
-    private List<Trade> tradesAsSeller;
+    private List<Trade> sellerTrades;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 
     private String name;
     private String email;

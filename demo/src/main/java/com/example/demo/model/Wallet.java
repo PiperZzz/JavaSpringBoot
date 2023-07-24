@@ -22,4 +22,8 @@ public class Wallet {
     
     private String cryptocurrency;
     private Double balance;
+    private String walletAddress;
+    private String walletStatus;
+    private String walletType;
+    private String walletName;
 }

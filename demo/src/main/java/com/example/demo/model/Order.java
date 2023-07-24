@@ -22,10 +22,12 @@ public class Order {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    private String orderNumber;
     private String orderType; // BUY or SELL
     private String orderStatus; // OPEN, COMPLETED, CANCELLED
     private String cryptocurrency;
     private Double quantity;
     private Double price;
-    private LocalDateTime orderTime;
+    private LocalDateTime openTime;
+    private LocalDateTime closeTime;
 }

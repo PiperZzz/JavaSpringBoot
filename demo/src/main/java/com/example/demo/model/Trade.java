@@ -31,4 +31,3 @@ public class Trade {
     private Double price;
     private LocalDateTime tradeTime;
 }
-

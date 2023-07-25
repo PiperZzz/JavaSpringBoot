@@ -13,9 +13,9 @@ import com.example.demo.model.Wallet;
 import com.example.demo.enums.OrderStatus;
 import com.example.demo.enums.OrderType;
 import com.example.demo.enums.Symbol;
+import com.example.demo.exception.InsufficientBalanceException;
 import com.example.demo.model.Asset;
 import com.example.demo.model.Order;
-import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.WalletRepository;
 import com.example.demo.repository.AssetRepository;
 import com.example.demo.repository.OrderRepository;
@@ -24,13 +24,11 @@ import com.example.demo.repository.OrderRepository;
 public class TradingService {
     private static final Logger logger= LoggerFactory.getLogger(TradingService.class);
 
-    private final UserRepository userRepository;
     private final WalletRepository walletRepository;
     private final OrderRepository orderRepository;
     private final AssetRepository assetRepository;
 
-    public TradingService(UserRepository userRepository, WalletRepository walletRepository, OrderRepository orderRepository, AssetRepository assetRepository) {
-        this.userRepository = userRepository;
+    public TradingService(WalletRepository walletRepository, OrderRepository orderRepository, AssetRepository assetRepository) {
         this.walletRepository = walletRepository;
         this.orderRepository = orderRepository;
         this.assetRepository = assetRepository;
@@ -41,7 +39,7 @@ public class TradingService {
 
         Wallet wallet = walletRepository.findByUser(user);
         if (wallet.getBalance() < amount * price) {
-            throw new RuntimeException("Insufficient balance");
+            throw new InsufficientBalanceException();
         }
         wallet.setBalance(wallet.getBalance() - amount * price);
         walletRepository.save(wallet);
@@ -65,12 +63,12 @@ public class TradingService {
         if (result.isPresent()) {
             Asset asset = result.get();
             if (asset.getAmount() < amount) {
-                throw new RuntimeException("Insufficient balance");
+                throw new InsufficientBalanceException();
             }
             asset.setAmount(asset.getAmount() - amount);
             assetRepository.save(asset);
         } else {
-            throw new RuntimeException("Insufficient balance");
+            throw new InsufficientBalanceException();
         }
     }
 

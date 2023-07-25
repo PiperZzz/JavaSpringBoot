@@ -15,7 +15,7 @@ import lombok.Data;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -26,8 +26,10 @@ public class Order {
     private String orderType; // BUY or SELL
     private String orderStatus; // OPEN, COMPLETED, CANCELLED
     private String cryptocurrency;
-    private Double quantity;
+    private Double amount;
     private Double price;
+    private Double fee;
+    private Double total;
     private LocalDateTime openTime;
     private LocalDateTime closeTime;
 }

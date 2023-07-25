@@ -13,7 +13,7 @@ import lombok.Data;
 public class Wallet {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @ManyToOne
@@ -26,4 +26,6 @@ public class Wallet {
     private String walletStatus;
     private String walletType;
     private String walletName;
+    private String walletPassword;
+    private String walletPublicKey;
 }

@@ -15,7 +15,7 @@ import lombok.Data;
 public class Trade {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -27,7 +27,9 @@ public class Trade {
     private User seller;
 
     private String cryptocurrency;
-    private Double quantity;
+    private Double amount;
     private Double price;
+    private Double fee;
+    private Double total;
     private LocalDateTime tradeTime;
 }

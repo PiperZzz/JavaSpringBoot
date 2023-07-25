@@ -26,7 +26,7 @@ public class Trade {
     @JoinColumn(name = "seller_id", nullable = false)
     private User seller;
 
-    private String cryptocurrency;
+    private String symbol;
     private Double amount;
     private Double price;
     private Double fee;

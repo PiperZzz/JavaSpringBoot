@@ -25,7 +25,7 @@ public class Order {
     private String orderNumber;
     private String orderType; // BUY or SELL
     private String orderStatus; // OPEN, COMPLETED, CANCELLED
-    private String cryptocurrency;
+    private String symbol;
     private Double amount;
     private Double price;
     private Double fee;

@@ -21,14 +21,14 @@ import com.example.demo.repository.AssetRepository;
 import com.example.demo.repository.OrderRepository;
 
 @Service
-public class TradingService {
-    private static final Logger logger= LoggerFactory.getLogger(TradingService.class);
+public class TradeService {
+    private static final Logger logger= LoggerFactory.getLogger(TradeService.class);
 
     private final WalletRepository walletRepository;
     private final OrderRepository orderRepository;
     private final AssetRepository assetRepository;
 
-    public TradingService(WalletRepository walletRepository, OrderRepository orderRepository, AssetRepository assetRepository) {
+    public TradeService(WalletRepository walletRepository, OrderRepository orderRepository, AssetRepository assetRepository) {
         this.walletRepository = walletRepository;
         this.orderRepository = orderRepository;
         this.assetRepository = assetRepository;

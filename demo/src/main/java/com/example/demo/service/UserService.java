@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.UserRepository;
+import com.example.demo.controller.dto.RegisterRequest;
 import com.example.demo.model.User;
 // import org.springframework.cache.annotation.Cacheable;
 
@@ -22,8 +23,12 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public void save(RegisterRequest registerRequest) {
+        registerRequest.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        User user = new User();
+        user.setUsername(registerRequest.getUsername());
+        user.setEmail(registerRequest.getEmail());
+        user.setPassword(registerRequest.getPassword());
         userRepository.save(user);
     }
 

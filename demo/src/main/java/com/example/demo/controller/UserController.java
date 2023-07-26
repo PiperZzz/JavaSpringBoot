@@ -21,6 +21,7 @@ import com.example.demo.service.CustomUserDetailsService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.JwtTokenUtil;
 import com.example.demo.controller.dto.LoginResponse;
+import com.example.demo.controller.dto.RegisterRequest;
 import com.example.demo.controller.dto.UserResponse;
 import com.example.demo.controller.dto.ErrorResponse;
 import com.example.demo.controller.dto.LoginRequest;
@@ -42,10 +43,10 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public @ResponseBody UserResponse submitUser(@RequestBody User user) {
+    public @ResponseBody UserResponse submitUser(@RequestBody RegisterRequest registerRequest) {
         try {
-            logger.info("Received User: {}", user.getUsername());
-            userService.save(user);
+            logger.info("Received User: {}", registerRequest.getUsername());
+            userService.save(registerRequest);
             return new UserResponse(true, "User has been added successfully");
         } catch (DataIntegrityViolationException e) {
             logger.error("Error occurred while saving user: ", e);

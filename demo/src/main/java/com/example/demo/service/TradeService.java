@@ -18,19 +18,19 @@ import com.example.demo.model.Asset;
 import com.example.demo.model.UserOrder;
 import com.example.demo.repository.WalletRepository;
 import com.example.demo.repository.AssetRepository;
-import com.example.demo.repository.OrderRepository;
+import com.example.demo.repository.UserOrderRepository;
 
 @Service
 public class TradeService {
     private static final Logger logger= LoggerFactory.getLogger(TradeService.class);
 
     private final WalletRepository walletRepository;
-    private final OrderRepository orderRepository;
+    private final UserOrderRepository userOrderRepository;
     private final AssetRepository assetRepository;
 
-    public TradeService(WalletRepository walletRepository, OrderRepository orderRepository, AssetRepository assetRepository) {
+    public TradeService(WalletRepository walletRepository, UserOrderRepository userOrderRepository, AssetRepository assetRepository) {
         this.walletRepository = walletRepository;
-        this.orderRepository = orderRepository;
+        this.userOrderRepository = userOrderRepository;
         this.assetRepository = assetRepository;
     }
 
@@ -51,7 +51,7 @@ public class TradeService {
         userOrder.setAmount(amount);
         userOrder.setOrderStatus(OrderStatus.OPEN);
         userOrder.setOpenTime(LocalDateTime.now());
-        orderRepository.save(userOrder);
+        userOrderRepository.save(userOrder);
     }
 
     public void sell(User user, String symbol, double amount, double price) {

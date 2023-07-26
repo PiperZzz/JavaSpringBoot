@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Entity
 @Data
-public class OrderEvent {
+public class Event {
     private long orderEventId;
 }

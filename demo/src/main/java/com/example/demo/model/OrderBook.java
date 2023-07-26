@@ -1,7 +1,5 @@
 package com.example.demo.model;
 
-import com.example.demo.enums.Symbol;
-
 import javax.persistence.Entity;
 
 import lombok.Data;
@@ -10,5 +8,4 @@ import lombok.Data;
 @Data
 public class OrderBook {
     private long orderBookId;
-    private Symbol symbol;
 }

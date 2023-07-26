@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.repository.UserRepository;
 import com.example.demo.controller.dto.RegisterRequest;
+import com.example.demo.dao.UserRepository;
 import com.example.demo.model.User;
 /**
  * import org.springframework.cache.annotation.Cacheable;

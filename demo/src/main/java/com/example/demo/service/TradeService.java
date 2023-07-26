@@ -10,15 +10,15 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.User;
 import com.example.demo.model.Wallet;
+import com.example.demo.dao.AssetRepository;
+import com.example.demo.dao.UserOrderRepository;
+import com.example.demo.dao.WalletRepository;
 import com.example.demo.enums.OrderStatus;
 import com.example.demo.enums.OrderType;
 import com.example.demo.enums.Symbol;
 import com.example.demo.exception.InsufficientBalanceException;
 import com.example.demo.model.Asset;
 import com.example.demo.model.UserOrder;
-import com.example.demo.repository.WalletRepository;
-import com.example.demo.repository.AssetRepository;
-import com.example.demo.repository.UserOrderRepository;
 
 @Service
 public class TradeService {

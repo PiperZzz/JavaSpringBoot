@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.controller.dto.TradeRequest;
+import com.example.demo.dao.UserRepository;
 import com.example.demo.enums.Symbol;
 import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
 import com.example.demo.service.TradeService;
 import com.example.demo.util.EnumUtil;
 

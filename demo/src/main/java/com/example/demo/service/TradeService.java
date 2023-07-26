@@ -15,7 +15,7 @@ import com.example.demo.enums.OrderType;
 import com.example.demo.enums.Symbol;
 import com.example.demo.exception.InsufficientBalanceException;
 import com.example.demo.model.Asset;
-import com.example.demo.model.Order;
+import com.example.demo.model.TradingOrder;
 import com.example.demo.repository.WalletRepository;
 import com.example.demo.repository.AssetRepository;
 import com.example.demo.repository.OrderRepository;
@@ -44,7 +44,7 @@ public class TradeService {
         wallet.setBalance(wallet.getBalance() - amount * price);
         walletRepository.save(wallet);
 
-        Order order = new Order();
+        TradingOrder order = new TradingOrder();
         order.setUser(user);
         order.setOrderType(OrderType.BUY);
         order.setSymbol(Symbol.valueOf(symbol));

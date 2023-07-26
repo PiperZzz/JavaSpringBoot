@@ -30,7 +30,7 @@ public class User {
     private List<Trade> sellerTrades;
 
     @OneToMany(mappedBy = "user")
-    private List<Order> orders;
+    private List<TradingOrder> orders;
 
     private String name;
     private String email;

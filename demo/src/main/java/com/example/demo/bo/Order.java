@@ -2,18 +2,21 @@ package com.example.demo.bo;
 
 import com.example.demo.enums.OrderType;
 
+import javassist.compiler.ast.Symbol;
 import lombok.Data;
 
 @Data
 public class Order implements Comparable<Order> {
     private String id;
-    private OrderType orderType;
+    private Symbol symbol;
+    private OrderType type;
     private double price;
     private double amount;
 
-    public Order(String id, OrderType orderType, double price, double amount) {
+    public Order(String id, Symbol symbol, OrderType type, double price, double amount) {
         this.id = id;
-        this.orderType = orderType;
+        this.symbol = symbol;
+        this.type = type;
         this.price = price;
         this.amount = amount;
     }

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.controller.dto.TradeRequest;
 import com.example.demo.enums.Symbol;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
@@ -24,20 +25,24 @@ public class TradeController {
     }
 
     @PostMapping("/buy")
-    public void buy(@RequestParam String username, @RequestParam String symbol, @RequestParam double amount, @RequestParam double price) {
+    public void buy(@RequestParam TradeRequest tradeRequest) {
+        String username = tradeRequest.getUsername();
+        String symbol = tradeRequest.getSymbol();
         if (!EnumUtil.contains(Symbol.class, symbol)) {
             throw new IllegalArgumentException("Invalid symbol");
         }
         User user = userRepository.findByUsername(username);
-        tradeService.buy(user, symbol, amount, price);
+        tradeService.buy(user, symbol, tradeRequest.getAmount(), tradeRequest.getPrice());
     }
 
     @PostMapping("/sell")
-    public void sell(@RequestParam String username, @RequestParam String symbol, @RequestParam double amount, @RequestParam double price) {
+    public void sell(@RequestParam TradeRequest tradeRequest) {
+        String username = tradeRequest.getUsername();
+        String symbol = tradeRequest.getSymbol();
         if (!EnumUtil.contains(Symbol.class, symbol)) {
             throw new IllegalArgumentException("Invalid symbol");
         }
         User user = userRepository.findByUsername(username);
-        tradeService.sell(user, symbol, amount, price);
+        tradeService.sell(user, symbol, tradeRequest.getAmount(), tradeRequest.getPrice());
     }
 }

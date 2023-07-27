@@ -22,7 +22,7 @@ public class OrderBook {
     }
 
     public void addOrder(Order order) {
-        if (order.getType().equals(OrderType.BUY) && order.getSymbol().equals(symbol)) {
+        if (order.getType().equals(OrderType.BUY) && order.getSymbol() == symbol) {
             buyOrders.add(order);
         } else if (order.getType().equals(OrderType.SELL)) {
             sellOrders.add(order);

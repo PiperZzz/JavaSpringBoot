@@ -1,8 +1,8 @@
 package com.example.demo.bo;
 
 import com.example.demo.enums.OrderType;
+import com.example.demo.enums.Symbol;
 
-import javassist.compiler.ast.Symbol;
 import lombok.Data;
 
 @Data

@@ -1,20 +1,28 @@
 package com.example.demo.bo;
 
+import java.beans.ConstructorProperties;
 import java.util.PriorityQueue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.example.demo.enums.OrderType;
+import com.example.demo.enums.Symbol;
 
 public class OrderBook {
     private static final Logger logger = LoggerFactory.getLogger(OrderBook.class);
 
+    private Symbol symbol;
     private PriorityQueue<Order> buyOrders = new PriorityQueue<>();
     private PriorityQueue<Order> sellOrders = new PriorityQueue<>();
 
+    @ConstructorProperties({"symbol"})
+    public OrderBook(Symbol symbol) {
+        this.symbol = symbol;
+    }
+
     public void addOrder(Order order) {
-        if (order.getType().equals(OrderType.BUY)) {
+        if (order.getType().equals(OrderType.BUY) && order.getSymbol().equals(symbol)) {
             buyOrders.add(order);
         } else if (order.getType().equals(OrderType.SELL)) {
             sellOrders.add(order);

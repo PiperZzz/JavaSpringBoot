@@ -7,13 +7,13 @@ import lombok.Data;
 
 @Data
 public class Order implements Comparable<Order> {
-    private String id;
+    private long id;
     private Symbol symbol;
     private OrderType type;
     private double price;
     private double amount;
 
-    public Order(String id, Symbol symbol, OrderType type, double price, double amount) {
+    public Order(long id, Symbol symbol, OrderType type, double price, double amount) {
         this.id = id;
         this.symbol = symbol;
         this.type = type;

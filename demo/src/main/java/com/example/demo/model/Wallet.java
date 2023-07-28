@@ -17,7 +17,7 @@ public class Wallet {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -26,7 +26,7 @@ public class Wallet {
     @OneToMany(mappedBy = "wallet")
     private List<Asset> assets;
     
-    private Double balance;
+    private double balance;
     private String walletStatus;
     private String walletType;
     private String walletName;

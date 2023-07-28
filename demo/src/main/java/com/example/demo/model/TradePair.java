@@ -17,7 +17,7 @@ public class TradePair {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private long id;
 
     @Enumerated(EnumType.STRING)
     private SymbolPair symbolPair;

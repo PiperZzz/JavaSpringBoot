@@ -21,7 +21,7 @@ public class Trade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "buyer_id", nullable = false)
@@ -34,10 +34,10 @@ public class Trade {
     @Enumerated(EnumType.STRING)
     private Symbol symbol;
     
-    private Double amount;
-    private Double price;
-    private Double fee;
-    private Double total;
+    private double amount;
+    private double price;
+    private double fee;
+    private double total;
     
     private LocalDateTime tradeTime;
 }

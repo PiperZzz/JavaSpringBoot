@@ -9,5 +9,5 @@ public enum OrderType {
     STOP_BUY_LIMIT,
     STOP_SELL,
     STOP_SELL_LIMIT,
-    CANCEL;
+    CANCEL
 }

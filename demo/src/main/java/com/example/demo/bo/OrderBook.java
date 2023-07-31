@@ -51,6 +51,7 @@ public class OrderBook {
     }
 
     private void matchOrders() {
+        //TOOD move into TradeService
         while (!buyOrders.isEmpty() && !sellOrders.isEmpty()) {
             Order buyOrder = buyOrders.peek();
             Order sellOrder = sellOrders.peek();

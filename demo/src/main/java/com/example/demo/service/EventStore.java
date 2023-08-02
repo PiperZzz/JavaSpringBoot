@@ -5,15 +5,21 @@ import java.util.List;
 
 import com.example.demo.bo.OrderEvent;
 
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EventStore {
     private List<OrderEvent> orderEvents = new ArrayList<>();
+    private final KafkaTemplate<String, String> kafkaTemplate;
+
+    public EventStore(KafkaTemplate<String, String> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
 
     public void saveEvent(OrderEvent orderEvent) {
-        //TODO Save the event to database
         orderEvents.add(orderEvent);
+        kafkaTemplate.send("order-events", orderEvent.toString());
     }
 
     public List<OrderEvent> getOrderEvents() {

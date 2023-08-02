@@ -21,9 +21,4 @@ public class EventStore {
         orderEvents.add(orderEvent);
         kafkaTemplate.send("order-events", orderEvent.toString());
     }
-
-    public List<OrderEvent> getOrderEvents() {
-        //TODO Load the events from database
-        return orderEvents;
-    }
 }

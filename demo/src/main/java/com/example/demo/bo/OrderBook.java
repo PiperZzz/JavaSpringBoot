@@ -40,7 +40,7 @@ public class OrderBook {
         } else if (order.getType().equals(OrderType.CANCEL)) {
             buyOrders.remove(order);
             sellOrders.remove(order);
-        } //TODO Handle other order types
+        } //TODO Handle other order types Abstract order type
 
         OrderEvent orderEvent = new OrderEvent();
         orderEvent.setOrderId(order.getId());

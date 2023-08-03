@@ -33,6 +33,6 @@ public class EventStore {
     }
 
     public void saveEvent(OrderEvent orderEvent) {
-        kafkaTemplateObjectMsg.send(MessageTopic.APPLICATION_EVENT.name(), orderEvent);
+        kafkaTemplateObjectMsg.send(MessageTopic.ORDER_EVENT.name(), orderEvent);
     }
 }

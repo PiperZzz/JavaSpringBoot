@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 
 import javax.annotation.PostConstruct;
 
@@ -13,20 +12,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EventStore {
-    private List<OrderEvent> orderEvents = new ArrayList<>();
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, String> kafkaTemplateStringMsg;
+    private final KafkaTemplate<String, Object> kafkaTemplateObjectMsg;
 
-    public EventStore(KafkaTemplate<String, String> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
+    public EventStore(KafkaTemplate<String, String> kafkaTemplateStringMsg, KafkaTemplate<String, Object> kafkaTemplateObjectMsg) {
+        this.kafkaTemplateStringMsg = kafkaTemplateStringMsg;
+        this.kafkaTemplateObjectMsg = kafkaTemplateObjectMsg;
     }
 
     @PostConstruct
     public void eventStoreInit() {
-        kafkaTemplate.send(MessageTopic.APPLICATION_EVENT.name(), "Trading Application Server - OrderStore Service Initialized");
+        kafkaTemplateStringMsg.send(MessageTopic.APPLICATION_EVENT.name(), "Trading Application Server - OrderStore Service Initialized");
+    }
+
+    @PostConstruct
+    public void testSaveEvent() {
+        OrderEvent orderEvent = new OrderEvent();
+        orderEvent.setOrderOpenTime(LocalDateTime.now());
+        kafkaTemplateObjectMsg.send(MessageTopic.ORDER_EVENT.name(), orderEvent);
     }
 
     public void saveEvent(OrderEvent orderEvent) {
-        orderEvents.add(orderEvent);
-        kafkaTemplate.send("order-events", orderEvent.toString());
+        kafkaTemplateObjectMsg.send(MessageTopic.APPLICATION_EVENT.name(), orderEvent);
     }
 }

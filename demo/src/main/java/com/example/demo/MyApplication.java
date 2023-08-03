@@ -13,6 +13,6 @@ public class MyApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MyApplication.class, args);
-		logger.info("Server Ready!");
+		logger.info("Trading Application Server Ready!");
 	}
 }

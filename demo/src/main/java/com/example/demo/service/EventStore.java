@@ -22,7 +22,7 @@ public class EventStore {
 
     @PostConstruct
     public void eventStoreInit() {
-        kafkaTemplate.send(MessageTopic.APPLICATION_EVENT.name(), "OrderStore Initialized");
+        kafkaTemplate.send(MessageTopic.APPLICATION_EVENT.name(), "Trading Application Server - OrderStore Service Initialized");
     }
 
     public void saveEvent(OrderEvent orderEvent) {

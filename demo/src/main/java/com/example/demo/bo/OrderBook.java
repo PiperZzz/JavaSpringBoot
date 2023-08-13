@@ -6,6 +6,7 @@ import java.util.PriorityQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.example.demo.bo.order.Order;
 import com.example.demo.enums.OrderType;
 import com.example.demo.enums.Symbol;
 import com.example.demo.service.EventStore;

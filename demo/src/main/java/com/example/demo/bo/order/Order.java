@@ -1,4 +1,4 @@
-package com.example.demo.bo;
+package com.example.demo.bo.order;
 
 import com.example.demo.enums.OrderType;
 import com.example.demo.enums.Symbol;
@@ -6,14 +6,14 @@ import com.example.demo.enums.Symbol;
 import lombok.Data;
 
 @Data
-public class Order implements Comparable<Order> {
+public abstract class Order implements Comparable<Order> {
     private long id;
     private Symbol symbol;
-    private OrderType type;
+    private OrderType type; //TODO interface
     private double price;
     private double amount;
 
-    public Order(long id, Symbol symbol, OrderType type, double price, double amount) {
+    protected Order(long id, Symbol symbol, OrderType type, double price, double amount) {
         this.id = id;
         this.symbol = symbol;
         this.type = type;

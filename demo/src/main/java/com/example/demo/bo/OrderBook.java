@@ -8,13 +8,13 @@ import org.slf4j.LoggerFactory;
 
 import com.example.demo.bo.order.AbstractOrder;
 import com.example.demo.enums.OrderType;
-import com.example.demo.enums.Symbol;
+import com.example.demo.enums.SymbolCode;
 import com.example.demo.service.EventStore;
 
 public class OrderBook {
     private static final Logger logger = LoggerFactory.getLogger(OrderBook.class);
 
-    private Symbol symbol;
+    private SymbolCode symbol;
     private PriorityQueue<AbstractOrder> buyOrders = new PriorityQueue<>();
     private PriorityQueue<AbstractOrder> sellOrders = new PriorityQueue<>();
 
@@ -25,7 +25,7 @@ public class OrderBook {
     }
 
     @ConstructorProperties({"symbol"})
-    public OrderBook(Symbol symbol) {
+    public OrderBook(SymbolCode symbol) {
         this.symbol = symbol;
     }
 

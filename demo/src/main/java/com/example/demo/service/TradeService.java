@@ -15,7 +15,7 @@ import com.example.demo.dao.UserOrderRepository;
 import com.example.demo.dao.WalletRepository;
 import com.example.demo.enums.OrderStatus;
 import com.example.demo.enums.OrderType;
-import com.example.demo.enums.Symbol;
+import com.example.demo.enums.SymbolCode;
 import com.example.demo.exception.InsufficientBalanceException;
 import com.example.demo.model.Asset;
 import com.example.demo.model.UserOrder;
@@ -34,8 +34,9 @@ public class TradeService {
         this.assetRepository = assetRepository;
     }
 
-    public void buy(User user, String symbol, double amount, double price) {
+    public void createOrder(User user, String symbol, double amount, double price) {
         logger.info("User {} Buying {} Amount of {} at Price {}", user, amount, symbol, price);
+        //TODO Refactor this method for general order creation
 
         Wallet wallet = walletRepository.findByUser(user);
         if (wallet.getBalance() < amount * price) {
@@ -47,19 +48,20 @@ public class TradeService {
         UserOrder userOrder = new UserOrder();
         userOrder.setUser(user);
         userOrder.setOrderType(OrderType.BUY);
-        userOrder.setSymbol(Symbol.valueOf(symbol));
+        userOrder.setSymbol(SymbolCode.valueOf(symbol));
         userOrder.setAmount(amount);
         userOrder.setOrderStatus(OrderStatus.OPEN);
         userOrder.setOpenTime(LocalDateTime.now());
         userOrderRepository.save(userOrder);
     }
 
-    public void sell(User user, String symbol, double amount, double price) {
+    public void cancelOrder(User user, String symbol, double amount, double price) {
         logger.info("User {} Selling {} Amount of {} at Price {}", user, amount, symbol, price);
+        //TODO Refactor this method for general order cancellation
 
         Wallet wallet = walletRepository.findByUser(user);
         List<Asset> assets = assetRepository.findBySymbol(wallet);
-        Optional<Asset> result = assets.stream().filter(asset -> asset.getSymbol().equals(Symbol.valueOf(symbol))).findFirst();
+        Optional<Asset> result = assets.stream().filter(asset -> asset.getSymbol().equals(SymbolCode.valueOf(symbol))).findFirst();
         if (result.isPresent()) {
             Asset asset = result.get();
             if (asset.getAmount() < amount) {

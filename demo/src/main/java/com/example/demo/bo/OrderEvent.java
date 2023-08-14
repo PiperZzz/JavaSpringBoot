@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import com.example.demo.enums.OrderStatus;
 import com.example.demo.enums.OrderType;
-import com.example.demo.enums.Symbol;
+import com.example.demo.enums.SymbolCode;
 
 import lombok.Data;
 
@@ -12,7 +12,7 @@ import lombok.Data;
 public class OrderEvent {
     private long orderId;
     private long userId;
-    private Symbol symbol;
+    private SymbolCode symbol;
     private OrderType orderType;
     private OrderStatus orderStatus;
     private double amount;

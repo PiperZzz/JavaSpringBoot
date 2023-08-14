@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.example.demo.enums.Symbol;
+import com.example.demo.enums.SymbolCode;
 
 import lombok.Data;
 
@@ -25,7 +25,7 @@ public class Asset {
     private Wallet wallet;
 
     @Enumerated(EnumType.STRING)
-    private Symbol symbol;
+    private SymbolCode symbol;
 
     private double amount;
     private String address;

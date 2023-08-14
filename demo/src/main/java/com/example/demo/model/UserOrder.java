@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 
 import com.example.demo.enums.OrderStatus;
 import com.example.demo.enums.OrderType;
-import com.example.demo.enums.Symbol;
+import com.example.demo.enums.SymbolCode;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,7 +38,7 @@ public class UserOrder {
     private OrderStatus orderStatus;
 
     @Enumerated(EnumType.STRING)
-    private Symbol symbol;
+    private SymbolCode symbol;
     
     private double amount;
     private double price;

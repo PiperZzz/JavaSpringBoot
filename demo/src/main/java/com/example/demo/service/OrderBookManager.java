@@ -10,31 +10,31 @@ import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.bo.OrderBook;
-import com.example.demo.enums.Symbol;
+import com.example.demo.enums.SymbolCode;
 
 @Service
 public class OrderBookManager {
-    private Map<Symbol, OrderBook> orderBooks = new ConcurrentHashMap<>();
+    private Map<SymbolCode, OrderBook> orderBooks = new ConcurrentHashMap<>();
 
     @PostConstruct
     public void init() {
-        List<Symbol> symbols = loadSymbolPairs();
+        List<SymbolCode> symbols = loadSymbolPairs();
 
-        for (Symbol symbol : symbols) {
+        for (SymbolCode symbol : symbols) {
             orderBooks.put(symbol, new OrderBook(symbol));
         }
     }
 
-    public OrderBook getOrderBook(Symbol symbol) {
+    public OrderBook getOrderBook(SymbolCode symbol) {
         return orderBooks.computeIfAbsent(symbol, k -> new OrderBook(symbol));
     }
 
-    public void addSymbolPair(Symbol symbol) {
+    public void addSymbolPair(SymbolCode symbol) {
         orderBooks.putIfAbsent(symbol, new OrderBook(symbol));
     }
 
-    private List<Symbol> loadSymbolPairs() {
+    private List<SymbolCode> loadSymbolPairs() {
         //TODO Load the list of symbol pairs from database
-        return Arrays.asList(Symbol.values());
+        return Arrays.asList(SymbolCode.values());
     }
 }

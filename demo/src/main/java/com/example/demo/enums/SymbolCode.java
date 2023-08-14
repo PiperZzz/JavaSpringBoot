@@ -1,6 +1,6 @@
 package com.example.demo.enums;
 
-public enum Symbol {
+public enum SymbolCode {
     BTC,
     ETH,
     LTC

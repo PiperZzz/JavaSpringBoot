@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.controller.dto.TradeRequest;
 import com.example.demo.dao.UserRepository;
-import com.example.demo.enums.Symbol;
+import com.example.demo.enums.SymbolCode;
 import com.example.demo.model.User;
 import com.example.demo.service.TradeService;
 import com.example.demo.util.EnumUtil;
@@ -24,25 +24,25 @@ public class TradeController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/buy")
-    public void buy(@RequestParam TradeRequest tradeRequest) {
+    @PostMapping("/create-order")
+    public void createOrder(@RequestParam TradeRequest tradeRequest) {
         String username = tradeRequest.getUsername();
         String symbol = tradeRequest.getSymbol();
-        if (!EnumUtil.contains(Symbol.class, symbol)) {
+        if (!EnumUtil.contains(SymbolCode.class, symbol)) {
             throw new IllegalArgumentException("Invalid symbol");
         }
         User user = userRepository.findByUsername(username);
-        tradeService.buy(user, symbol, tradeRequest.getAmount(), tradeRequest.getPrice());
+        tradeService.createOrder(user, symbol, tradeRequest.getQuantity(), tradeRequest.getLmitePrice());
     }
 
-    @PostMapping("/sell")
-    public void sell(@RequestParam TradeRequest tradeRequest) {
+    @PostMapping("/cancel-order")
+    public void cancel(@RequestParam TradeRequest tradeRequest) {
         String username = tradeRequest.getUsername();
         String symbol = tradeRequest.getSymbol();
-        if (!EnumUtil.contains(Symbol.class, symbol)) {
+        if (!EnumUtil.contains(SymbolCode.class, symbol)) {
             throw new IllegalArgumentException("Invalid symbol");
         }
         User user = userRepository.findByUsername(username);
-        tradeService.sell(user, symbol, tradeRequest.getAmount(), tradeRequest.getPrice());
+        tradeService.cancelOrder(user, symbol, tradeRequest.getQuantity(), tradeRequest.getLmitePrice());
     }
 }

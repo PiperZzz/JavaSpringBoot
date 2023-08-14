@@ -1,5 +1,6 @@
-package com.example.demo.bo.order;
+package com.example.demo.bo.order.orders;
 
+import com.example.demo.bo.order.AbstractOrder;
 import com.example.demo.bo.order.interfaces.BuySide;
 import com.example.demo.bo.order.interfaces.LimitOrder;
 import com.example.demo.enums.OrderType;
@@ -10,6 +11,11 @@ public class BuyLimitOrder extends AbstractOrder implements LimitOrder, BuySide 
 
     public BuyLimitOrder(long id, SymbolCode symbol, double price, double quantity) {
         super(id, symbol, price, quantity);
+    }
+
+    @Override
+    public double setExecutionPrice() {
+        return limitPrice;
     }
 
     @Override

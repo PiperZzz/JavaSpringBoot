@@ -22,6 +22,8 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
         this.quantity = quantity;
     }
 
+    public abstract double setExecutionPrice();
+
     public OrderType getOrderDirection() {
         return orderDirection;
     }

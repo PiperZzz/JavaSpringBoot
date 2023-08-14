@@ -11,16 +11,15 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
     private Symbol symbol;
     private OrderType type; //TODO interface
     private double price;
-    private double amount;
+    private double quantity;
 
     //TODO abastrct buy and sell direction 
 
-    protected AbstractOrder(long id, Symbol symbol, OrderType type, double price, double amount) {
+    protected AbstractOrder(long id, Symbol symbol, double price, double quantity) {
         this.id = id;
         this.symbol = symbol;
-        this.type = type;
         this.price = price;
-        this.amount = amount;
+        this.quantity = quantity;
     }
 
     @Override
@@ -30,7 +29,24 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
         } else if (this.price > other.price) {
             return -1;
         } else {
-            return 0;
+            return Long.compare(this.id, other.id); //TODO compare the time stamp
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        AbstractOrder other = (AbstractOrder) obj;
+        return this.id == other.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Long.hashCode(id);
     }
 }

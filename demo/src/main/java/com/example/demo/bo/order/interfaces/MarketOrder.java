@@ -1,5 +1,5 @@
 package com.example.demo.bo.order.interfaces;
 
 public interface MarketOrder {
-    void executeMarketOrder();
+    void setMarketPrice(double marketPrice);
 }

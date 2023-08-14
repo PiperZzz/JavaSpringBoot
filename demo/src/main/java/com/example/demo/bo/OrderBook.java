@@ -58,18 +58,18 @@ public class OrderBook {
             AbstractOrder sellOrder = sellOrders.peek();
 
             if (buyOrder.getPrice() >= sellOrder.getPrice()) {
-                double tradedAmount = Math.min(buyOrder.getAmount(), sellOrder.getAmount());
+                double tradedAmount = Math.min(buyOrder.getQuantity(), sellOrder.getQuantity());
 
                 logger.info("Matched {} at price {}", tradedAmount, buyOrder.getPrice());
 
-                buyOrder.setAmount(buyOrder.getAmount() - tradedAmount);
-                sellOrder.setAmount(sellOrder.getAmount() - tradedAmount);
+                buyOrder.setQuantity(buyOrder.getQuantity() - tradedAmount);
+                sellOrder.setQuantity(sellOrder.getQuantity() - tradedAmount);
 
-                if (buyOrder.getAmount() <= 0) {
+                if (buyOrder.getQuantity() <= 0) {
                     buyOrders.poll();
                 }
 
-                if (sellOrder.getAmount() <= 0) {
+                if (sellOrder.getQuantity() <= 0) {
                     sellOrders.poll();
                 }
             } else {

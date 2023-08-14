@@ -1,14 +1,20 @@
 package com.example.demo.bo.order;
 
-import com.example.demo.bo.order.interfaces.BuyOrder;
+import com.example.demo.bo.order.interfaces.BuySide;
 import com.example.demo.bo.order.interfaces.LimitOrder;
+import com.example.demo.enums.OrderType;
 import com.example.demo.enums.Symbol;
 
-public class BuyLimitOrder extends AbstractOrder implements BuyOrder, LimitOrder {
+public class BuyLimitOrder extends AbstractOrder implements BuySide, LimitOrder {
     private double limitPrice;
 
     public BuyLimitOrder(long id, Symbol symbol, double price, double quantity) {
         super(id, symbol, price, quantity);
+    }
+
+    @Override
+    public void setDirection() {
+        this.orderDirection = OrderType.BUY;
     }
 
     @Override

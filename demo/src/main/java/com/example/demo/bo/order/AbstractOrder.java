@@ -9,7 +9,7 @@ import lombok.Data;
 public abstract class AbstractOrder implements Comparable<AbstractOrder> {
     private long id;
     private Symbol symbol;
-    private OrderType type; //TODO interface
+    protected OrderType orderDirection; //TODO interface
     private double price;
     private double quantity;
 
@@ -20,6 +20,10 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
         this.symbol = symbol;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public OrderType getOrderDirection() {
+        return orderDirection;
     }
 
     @Override

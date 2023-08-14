@@ -34,14 +34,11 @@ public class OrderBook {
             throw new IllegalArgumentException("Order symbol does not match order book symbol");
         }
 
-        if (order.getType().equals(OrderType.BUY)) {
+        if (order.getOrderDirection().equals(OrderType.BUY)) {
             buyOrders.add(order);
-        } else if (order.getType().equals(OrderType.SELL)) {
+        } else if (order.getOrderDirection().equals(OrderType.SELL)) {
             sellOrders.add(order);
-        } else if (order.getType().equals(OrderType.CANCEL)) {
-            buyOrders.remove(order);
-            sellOrders.remove(order);
-        } //TODO Handle other order types Abstract order type
+        }
 
         OrderEvent orderEvent = new OrderEvent();
         orderEvent.setOrderId(order.getId());

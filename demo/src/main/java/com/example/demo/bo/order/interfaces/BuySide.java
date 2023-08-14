@@ -1,5 +1,6 @@
 package com.example.demo.bo.order.interfaces;
 
-public interface BuyOrder {
+public interface BuySide {
+    void setDirection();
     void executeBuy();
 }

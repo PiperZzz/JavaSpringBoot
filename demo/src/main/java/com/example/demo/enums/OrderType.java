@@ -1,13 +1,12 @@
 package com.example.demo.enums;
 
 public enum OrderType {
-    BUY,
-    BUY_LIMIT,
-    SELL,
-    SELL_LIMIT,
+    MARKET_BUY,
+    MARKET_SELL,
+    LIMIT_BUY,
+    LIMIT_SELL,
     STOP_BUY,
     STOP_BUY_LIMIT,
     STOP_SELL,
     STOP_SELL_LIMIT,
-    CANCEL
 }

@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
 import java.time.LocalDateTime;
+import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -17,8 +20,10 @@ import com.example.demo.enums.OrderStatus;
 import com.example.demo.enums.OrderType;
 import com.example.demo.enums.SymbolCode;
 import com.example.demo.exception.InsufficientBalanceException;
+import com.example.demo.factory.interfaces.OrderFactory;
 import com.example.demo.model.Asset;
 import com.example.demo.model.UserOrder;
+import com.example.demo.factory.LimitBuyOrderFactory;
 
 @Service
 public class TradeService {
@@ -27,16 +32,19 @@ public class TradeService {
     private final WalletRepository walletRepository;
     private final UserOrderRepository userOrderRepository;
     private final AssetRepository assetRepository;
+    private Map<OrderType, OrderFactory> orderFactoryMap = new HashMap<> ();
 
     public TradeService(WalletRepository walletRepository, UserOrderRepository userOrderRepository, AssetRepository assetRepository) {
         this.walletRepository = walletRepository;
         this.userOrderRepository = userOrderRepository;
         this.assetRepository = assetRepository;
+        orderFactoryMap.put(OrderType.LIMIT_BUY, new LimitBuyOrderFactory());
     }
 
     public void createOrder(User user, String symbol, double amount, double price) {
         logger.info("User {} Buying {} Amount of {} at Price {}", user, amount, symbol, price);
         //TODO Refactor this method for general order creation
+        //TODO create order according to input parameters
 
         Wallet wallet = walletRepository.findByUser(user);
         if (wallet.getBalance() < amount * price) {
@@ -47,7 +55,7 @@ public class TradeService {
 
         UserOrder userOrder = new UserOrder();
         userOrder.setUser(user);
-        userOrder.setOrderType(OrderType.BUY);
+        userOrder.setOrderType(OrderType.LIMIT_BUY);
         userOrder.setSymbol(SymbolCode.valueOf(symbol));
         userOrder.setAmount(amount);
         userOrder.setOrderStatus(OrderStatus.OPEN);

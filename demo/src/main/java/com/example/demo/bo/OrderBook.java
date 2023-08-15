@@ -34,9 +34,10 @@ public class OrderBook {
             throw new IllegalArgumentException("Order symbol does not match order book symbol");
         }
 
-        if (order.getOrderDirection().equals(OrderType.BUY)) {
+        //TODO refacor direction determination
+        if (order.getOrderDirection().equals(OrderType.LIMIT_BUY)) {
             buyOrders.add(order);
-        } else if (order.getOrderDirection().equals(OrderType.SELL)) {
+        } else if (order.getOrderDirection().equals(OrderType.LIMIT_SELL)) {
             sellOrders.add(order);
         }
 

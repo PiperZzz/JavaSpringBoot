@@ -1,6 +1,6 @@
 package com.example.demo.bo.order;
 
-import com.example.demo.enums.OrderType;
+import com.example.demo.enums.OrderDirection;
 import com.example.demo.enums.SymbolCode;
 
 import lombok.Data;
@@ -9,7 +9,7 @@ import lombok.Data;
 public abstract class AbstractOrder implements Comparable<AbstractOrder> {
     private long id;
     private SymbolCode symbol;
-    protected OrderType orderDirection; //TODO interface
+    protected OrderDirection orderDirection; //TODO interface
     private double price;
     private double quantity;
 
@@ -22,9 +22,13 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
         this.quantity = quantity;
     }
 
+    protected AbstractOrder() {
+
+    }
+
     public abstract double setExecutionPrice();
 
-    public OrderType getOrderDirection() {
+    public OrderDirection getOrderDirection() {
         return orderDirection;
     }
 

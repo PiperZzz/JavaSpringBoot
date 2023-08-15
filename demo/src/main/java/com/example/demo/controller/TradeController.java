@@ -27,6 +27,9 @@ public class TradeController {
     @PostMapping("/create-order")
     public void createOrder(@RequestParam TradeRequest tradeRequest) {
         //TODO Refactor this method for general order creation
+        //TODO user validation: 
+        //TODO order validation: price range, quantity range, balance, symbol existence
+        //TODO exception handling
         String username = tradeRequest.getUsername();
         String symbol = tradeRequest.getSymbol();
         if (!EnumUtil.contains(SymbolCode.class, symbol)) {

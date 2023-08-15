@@ -26,6 +26,7 @@ public class TradeController {
 
     @PostMapping("/create-order")
     public void createOrder(@RequestParam TradeRequest tradeRequest) {
+        //TODO Refactor this method for general order creation
         String username = tradeRequest.getUsername();
         String symbol = tradeRequest.getSymbol();
         if (!EnumUtil.contains(SymbolCode.class, symbol)) {
@@ -37,6 +38,7 @@ public class TradeController {
 
     @PostMapping("/cancel-order")
     public void cancel(@RequestParam TradeRequest tradeRequest) {
+        //TODO Refactor this method for general order cancellation
         String username = tradeRequest.getUsername();
         String symbol = tradeRequest.getSymbol();
         if (!EnumUtil.contains(SymbolCode.class, symbol)) {

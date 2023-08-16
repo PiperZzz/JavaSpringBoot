@@ -57,7 +57,7 @@ public class OrderService {
         abstractOrder.setQuantity(orderRequest.getQuantity());
         abstractOrder.setExcutionPrice(orderRequest.getExcutionPrice());
 
-        //TODO pass the order to order book manager
+        //TODO hand over the order to order book manager
 
     }
 

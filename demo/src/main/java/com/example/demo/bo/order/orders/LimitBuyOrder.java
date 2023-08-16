@@ -3,11 +3,9 @@ package com.example.demo.bo.order.orders;
 import com.example.demo.bo.order.AbstractOrder;
 import com.example.demo.bo.order.interfaces.BuySide;
 import com.example.demo.bo.order.interfaces.LimitOrder;
-
-import com.example.demo.enums.OrderDirection;
+import com.example.demo.enums.OrderStatus;
 
 public class LimitBuyOrder extends AbstractOrder implements LimitOrder, BuySide {
-    private double limitPrice;
 
     public LimitBuyOrder() {
         super();
@@ -15,22 +13,17 @@ public class LimitBuyOrder extends AbstractOrder implements LimitOrder, BuySide 
 
     @Override
     public double getExecutionPrice() {
-        return limitPrice;
-    }
-
-    @Override
-    public void setOrderDirection() {
-        this.orderDirection = OrderDirection.BUY;
+        return price;
     }
 
     @Override
     public void setExecutionPrice(double limitPrice) {
-        this.limitPrice = limitPrice;
+        price = limitPrice;
     }
 
     @Override
     public void executeOrder() {
-        //TODO
+        orderStatus = OrderStatus.CLOSE;
     }
 
     @Override

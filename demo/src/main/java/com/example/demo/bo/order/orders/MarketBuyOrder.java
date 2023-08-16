@@ -3,10 +3,9 @@ package com.example.demo.bo.order.orders;
 import com.example.demo.bo.order.AbstractOrder;
 import com.example.demo.bo.order.interfaces.BuySide;
 import com.example.demo.bo.order.interfaces.MarketOrder;
-import com.example.demo.enums.OrderDirection;
+import com.example.demo.enums.OrderStatus;
 
 public class MarketBuyOrder extends AbstractOrder implements MarketOrder, BuySide {
-    private double marketPrice;
 
     public MarketBuyOrder() {
         super();
@@ -14,22 +13,17 @@ public class MarketBuyOrder extends AbstractOrder implements MarketOrder, BuySid
 
     @Override
     public double getExecutionPrice() {
-        return marketPrice;
-    }
-
-    @Override
-    public void setOrderDirection() {
-        this.orderDirection = OrderDirection.BUY;
+        return price;
     }
 
     @Override
     public void setExecutionPrice(double marketPrice) {
-        this.marketPrice = marketPrice;
+        price = marketPrice;
     }
 
     @Override
     public void executeOrder() {
-        //TODO
+        orderStatus = OrderStatus.CLOSE;
     }
 
     @Override

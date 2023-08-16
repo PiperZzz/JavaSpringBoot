@@ -4,34 +4,30 @@ import com.example.demo.bo.order.AbstractOrder;
 import com.example.demo.bo.order.interfaces.BuySide;
 import com.example.demo.bo.order.interfaces.MarketOrder;
 import com.example.demo.bo.order.interfaces.StopOrder;
-import com.example.demo.enums.OrderDirection;
+import com.example.demo.enums.OrderStatus;
 
 public class StopMarketBuyOrder extends AbstractOrder implements StopOrder, MarketOrder, BuySide {
-    private double limitPrice;
     private double stopPrice;
+    private boolean isStopTriggered;
 
     public StopMarketBuyOrder() {
         super();
+        isStopTriggered = false;
     }
 
     @Override
     public double getExecutionPrice() {
-        return limitPrice;
+        return price;
     }
 
     @Override
-    public void setOrderDirection() {
-        this.orderDirection = OrderDirection.BUY;
-    }
-
-    @Override
-    public void setExecutionPrice(double limitPrice) {
-        this.limitPrice = limitPrice;
+    public void setExecutionPrice(double marketPrice) {
+        price = marketPrice;
     }
 
     @Override
     public void executeOrder() {
-        //TODO
+        orderStatus = OrderStatus.CLOSE;
     }
 
     @Override
@@ -41,7 +37,7 @@ public class StopMarketBuyOrder extends AbstractOrder implements StopOrder, Mark
 
     @Override
     public void triggerStop() {
-        //TODO
+        isStopTriggered = true;
     }
 
     @Override

@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.example.demo.bo.order.AbstractOrder;
-import com.example.demo.enums.OrderType;
+import com.example.demo.enums.OrderDirection;
 import com.example.demo.enums.SymbolCode;
 import com.example.demo.service.EventStore;
 
@@ -35,9 +35,9 @@ public class OrderBook {
         }
 
         //TODO refacor direction determination
-        if (order.getOrderDirection().equals(OrderType.LIMIT_BUY)) {
+        if (order.getOrderDirection().equals(OrderDirection.BUY)) {
             buyOrders.add(order);
-        } else if (order.getOrderDirection().equals(OrderType.LIMIT_SELL)) {
+        } else if (order.getOrderDirection().equals(OrderDirection.SELL)) {
             sellOrders.add(order);
         }
 

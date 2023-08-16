@@ -17,12 +17,12 @@ public class StopMarketBuyOrder extends AbstractOrder implements StopOrder, Mark
 
     @Override
     public double getExecutionPrice() {
-        return price;
+        return excutionPrice;
     }
 
     @Override
     public void setExecutionPrice(double marketPrice) {
-        price = marketPrice;
+        excutionPrice = marketPrice;
     }
 
     @Override

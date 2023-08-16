@@ -17,17 +17,16 @@ public class StopLImitBuyOrder extends AbstractOrder implements StopOrder, Limit
 
     @Override
     public double getExecutionPrice() {
-        return price;
+        return excutionPrice;
     }
 
     @Override
     public void setExecutionPrice(double limitPrice) {
-        price = limitPrice;
+        excutionPrice = limitPrice;
     }
 
     @Override
     public void executeOrder() {
-        //TODO
         orderStatus = OrderStatus.CLOSE;
     }
 

@@ -34,7 +34,6 @@ public class OrderBook {
             throw new IllegalArgumentException("Order symbol does not match order book symbol");
         }
 
-        //TODO refacor direction determination
         if (order.getOrderDirection().equals(OrderDirection.BUY)) {
             buyOrders.add(order);
         } else if (order.getOrderDirection().equals(OrderDirection.SELL)) {
@@ -55,10 +54,10 @@ public class OrderBook {
             AbstractOrder buyOrder = buyOrders.peek();
             AbstractOrder sellOrder = sellOrders.peek();
 
-            if (buyOrder.getPrice() >= sellOrder.getPrice()) {
+            if (buyOrder.getExcutionPrice() >= sellOrder.getExcutionPrice()) {
                 double tradedAmount = Math.min(buyOrder.getQuantity(), sellOrder.getQuantity());
 
-                logger.info("Matched {} at price {}", tradedAmount, buyOrder.getPrice());
+                logger.info("Matched {} at price {}", tradedAmount, buyOrder.getExcutionPrice());
 
                 buyOrder.setQuantity(buyOrder.getQuantity() - tradedAmount);
                 sellOrder.setQuantity(sellOrder.getQuantity() - tradedAmount);

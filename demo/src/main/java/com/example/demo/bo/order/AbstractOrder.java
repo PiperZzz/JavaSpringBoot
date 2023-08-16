@@ -14,7 +14,7 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
     protected SymbolCode symbolCode;
     protected OrderDirection orderDirection;
     protected OrderStatus orderStatus;
-    protected double price; //TODO: Move to interfaces
+    protected double excutionPrice; //TODO: Move to interfaces
     protected double quantity;
 
     protected AbstractOrder(SymbolCode symbolCode, double quantity) {
@@ -37,9 +37,9 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
 
     @Override
     public int compareTo(AbstractOrder other) {
-        if (this.price < other.price) {
+        if (this.excutionPrice < other.excutionPrice) {
             return 1;
-        } else if (this.price > other.price) {
+        } else if (this.excutionPrice > other.excutionPrice) {
             return -1;
         } else {
             //TODO when same price, compare the time stamp

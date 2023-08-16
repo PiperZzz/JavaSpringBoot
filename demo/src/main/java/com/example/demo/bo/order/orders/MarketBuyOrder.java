@@ -13,12 +13,12 @@ public class MarketBuyOrder extends AbstractOrder implements MarketOrder, BuySid
 
     @Override
     public double getExecutionPrice() {
-        return price;
+        return excutionPrice;
     }
 
     @Override
     public void setExecutionPrice(double marketPrice) {
-        price = marketPrice;
+        excutionPrice = marketPrice;
     }
 
     @Override

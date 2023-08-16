@@ -11,20 +11,20 @@ import com.example.demo.enums.OrderDirection;
 import com.example.demo.enums.SymbolCode;
 import com.example.demo.model.User;
 import com.example.demo.model.Asset;
-import com.example.demo.service.TradeService;
+import com.example.demo.service.OrderService;
 import com.example.demo.util.EnumUtil;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/trade")
-public class TradeController {
+public class OrderController {
 
-    private final TradeService tradeService;
+    private final OrderService tradeService;
     private final UserRepository userRepository;
 
-    public TradeController(TradeService tradingService, UserRepository userRepository) {
-        this.tradeService = tradingService;
+    public OrderController(OrderService orderService, UserRepository userRepository) {
+        this.tradeService = orderService;
         this.userRepository = userRepository;
     }
 

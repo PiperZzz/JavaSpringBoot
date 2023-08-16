@@ -26,8 +26,8 @@ import com.example.demo.exception.InsufficientBalanceException;
 import com.example.demo.factory.interfaces.OrderFactory;
 
 @Service
-public class TradeService {
-    private static final Logger logger= LoggerFactory.getLogger(TradeService.class);
+public class OrderService {
+    private static final Logger logger= LoggerFactory.getLogger(OrderService.class);
 
     private final WalletRepository walletRepository;
     private final UserOrderRepository userOrderRepository;
@@ -36,7 +36,7 @@ public class TradeService {
     @Autowired
     private final Map<OrderType, OrderFactory> orderFactoryMap;
 
-    public TradeService(WalletRepository walletRepository, UserOrderRepository userOrderRepository, AssetRepository assetRepository, Map<OrderType, OrderFactory> orderFactoryMap) {
+    public OrderService(WalletRepository walletRepository, UserOrderRepository userOrderRepository, AssetRepository assetRepository, Map<OrderType, OrderFactory> orderFactoryMap) {
         this.walletRepository = walletRepository;
         this.userOrderRepository = userOrderRepository;
         this.assetRepository = assetRepository;

@@ -3,8 +3,8 @@ package com.example.demo.bo.order.orders;
 import com.example.demo.bo.order.AbstractOrder;
 import com.example.demo.bo.order.interfaces.BuySide;
 import com.example.demo.bo.order.interfaces.LimitOrder;
+
 import com.example.demo.enums.OrderDirection;
-import com.example.demo.enums.SymbolCode;
 
 public class LimitBuyOrder extends AbstractOrder implements LimitOrder, BuySide {
     private double limitPrice;

@@ -30,7 +30,7 @@ public class OrderBook {
     }
 
     public void addOrder(AbstractOrder order) {
-        if (!order.getSymbol().equals(symbol)) {
+        if (!order.getSymbolCode().equals(symbol)) {
             throw new IllegalArgumentException("Order symbol does not match order book symbol");
         }
 

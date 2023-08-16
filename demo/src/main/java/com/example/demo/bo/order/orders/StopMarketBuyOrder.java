@@ -5,7 +5,6 @@ import com.example.demo.bo.order.interfaces.BuySide;
 import com.example.demo.bo.order.interfaces.MarketOrder;
 import com.example.demo.bo.order.interfaces.StopOrder;
 import com.example.demo.enums.OrderDirection;
-import com.example.demo.enums.SymbolCode;
 
 public class StopMarketBuyOrder extends AbstractOrder implements StopOrder, MarketOrder, BuySide {
     private double limitPrice;

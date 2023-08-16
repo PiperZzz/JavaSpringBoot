@@ -1,5 +1,7 @@
 package com.example.demo.bo.order;
 
+import java.util.UUID;
+
 import com.example.demo.enums.OrderDirection;
 import com.example.demo.enums.OrderStatus;
 import com.example.demo.enums.SymbolCode;
@@ -9,14 +11,22 @@ import lombok.Data;
 @Data
 public abstract class AbstractOrder implements Comparable<AbstractOrder> {
     protected long id;
-    protected SymbolCode symbol;
+    protected SymbolCode symbolCode;
     protected OrderDirection orderDirection;
     protected OrderStatus orderStatus;
-    protected double price;
+    protected double price; //TODO: Move to interfaces
     protected double quantity;
 
+    protected AbstractOrder(SymbolCode symbolCode, double quantity) {
+        this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        this.symbolCode = symbolCode;
+        this.quantity = quantity;
+        this.orderStatus = OrderStatus.OPEN;
+    }
+
     protected AbstractOrder() {
-        //TODO abastrct buy and sell direction
+        this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        this.orderStatus = OrderStatus.OPEN;
     }
 
     public abstract double getExecutionPrice();
@@ -39,6 +49,7 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
 
     @Override
     public boolean equals(Object obj) {
+        //TODO need to compare orderStatus as well
         if (this == obj) {
             return true;
         }
@@ -51,6 +62,7 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
 
     @Override
     public int hashCode() {
+        //TODO need to hash orderStatus as well
         return Long.hashCode(id);
     }
 }

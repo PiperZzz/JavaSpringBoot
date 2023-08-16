@@ -33,12 +33,12 @@ public class LimitBuyOrder extends AbstractOrder implements LimitOrder, BuySide 
     }
 
     @Override
-    public void setLimitPrice(double limitPrice) {
+    public void setExecutionPrice(double limitPrice) {
         this.limitPrice = limitPrice;
     }
 
     @Override
-    public void executeBuy() {
+    public void executeOrder() {
         //TODO
     }
 

@@ -28,12 +28,12 @@ public class MarketBuyOrder extends AbstractOrder implements MarketOrder, BuySid
     }
 
     @Override
-    public void setMarketPrice(double marketPrice) {
+    public void setExecutionPrice(double marketPrice) {
         this.marketPrice = marketPrice;
     }
 
     @Override
-    public void executeBuy() {
+    public void executeOrder() {
         //TODO
     }
 

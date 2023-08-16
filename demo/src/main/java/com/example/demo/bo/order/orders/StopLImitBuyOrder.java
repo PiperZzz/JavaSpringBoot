@@ -37,7 +37,7 @@ public class StopLImitBuyOrder extends AbstractOrder implements StopOrder, Limit
 
     @Override
     public void triggerStop() {
-        this.isStopTriggered = true;
+        isStopTriggered = true;
     }
 
     @Override

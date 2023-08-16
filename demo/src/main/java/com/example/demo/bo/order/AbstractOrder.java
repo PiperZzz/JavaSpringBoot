@@ -14,8 +14,17 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
     protected SymbolCode symbolCode;
     protected OrderDirection orderDirection;
     protected OrderStatus orderStatus;
-    protected double excutionPrice; //TODO: Move to interfaces
     protected double quantity;
+    protected double excutionPrice;
+
+    //TODO remove unused constructors
+    protected AbstractOrder(SymbolCode symbolCode, double quantity, double excutionPrice) {
+        this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        this.symbolCode = symbolCode;
+        this.quantity = quantity;
+        this.excutionPrice = excutionPrice;
+        this.orderStatus = OrderStatus.OPEN;
+    }
 
     protected AbstractOrder(SymbolCode symbolCode, double quantity) {
         this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;

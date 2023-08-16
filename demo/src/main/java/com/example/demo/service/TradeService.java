@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.User;
@@ -20,10 +21,6 @@ import com.example.demo.enums.OrderType;
 import com.example.demo.enums.SymbolCode;
 import com.example.demo.exception.InsufficientBalanceException;
 import com.example.demo.factory.interfaces.OrderFactory;
-import com.example.demo.factory.LimitBuyOrderFactory;
-import com.example.demo.factory.MarketBuyOrderFactory;
-import com.example.demo.factory.StopLimitBuyOrderFactory;
-import com.example.demo.factory.StopMarkeBuyOrderFactory;
 
 @Service
 public class TradeService {
@@ -32,20 +29,20 @@ public class TradeService {
     private final WalletRepository walletRepository;
     private final UserOrderRepository userOrderRepository;
     private final AssetRepository assetRepository;
-    private Map<OrderType, OrderFactory> orderFactoryMap = new HashMap<> ();
+    
+    @Autowired
+    private Map<OrderType, OrderFactory> orderFactoryMap;
 
-    public TradeService(WalletRepository walletRepository, UserOrderRepository userOrderRepository, AssetRepository assetRepository) {
+    public TradeService(WalletRepository walletRepository, UserOrderRepository userOrderRepository, AssetRepository assetRepository, Map<OrderType, OrderFactory> orderFactoryMap) {
         this.walletRepository = walletRepository;
         this.userOrderRepository = userOrderRepository;
         this.assetRepository = assetRepository;
-        orderFactoryMap.put(OrderType.LIMIT_BUY, new LimitBuyOrderFactory());
-        orderFactoryMap.put(OrderType.MARKET_BUY, new MarketBuyOrderFactory());
-        orderFactoryMap.put(OrderType.STOP_LIMIT_BUY, new StopLimitBuyOrderFactory());
-        orderFactoryMap.put(OrderType.STOP_MARKET_BUY, new StopMarkeBuyOrderFactory());
+        this.orderFactoryMap = orderFactoryMap;
     }
 
     public void createOrder(User user, OrderRequest orderRequest) {
         logger.info("Create Order for User: {}, Request: {}", user, orderRequest);
+
 
     }
 

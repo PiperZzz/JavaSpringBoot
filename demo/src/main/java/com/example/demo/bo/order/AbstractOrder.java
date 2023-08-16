@@ -1,6 +1,7 @@
 package com.example.demo.bo.order;
 
 import java.util.UUID;
+import java.time.LocalDateTime;
 
 import com.example.demo.enums.OrderDirection;
 import com.example.demo.enums.OrderStatus;
@@ -16,26 +17,32 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
     protected OrderStatus orderStatus;
     protected double quantity;
     protected double excutionPrice;
+    protected LocalDateTime orderOpenTime;
+    protected LocalDateTime orderCloseTime;
+    protected LocalDateTime orderLastUpdateTime;
 
     //TODO remove unused constructors
     protected AbstractOrder(SymbolCode symbolCode, double quantity, double excutionPrice) {
-        this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        orderStatus = OrderStatus.OPEN;
+        orderOpenTime = LocalDateTime.now();
         this.symbolCode = symbolCode;
         this.quantity = quantity;
         this.excutionPrice = excutionPrice;
-        this.orderStatus = OrderStatus.OPEN;
     }
 
     protected AbstractOrder(SymbolCode symbolCode, double quantity) {
-        this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        this.symbolCode = symbolCode;
+        id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        orderStatus = OrderStatus.OPEN;
+        orderOpenTime = LocalDateTime.now();
         this.quantity = quantity;
-        this.orderStatus = OrderStatus.OPEN;
+        this.symbolCode = symbolCode;
     }
 
     protected AbstractOrder() {
-        this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        this.orderStatus = OrderStatus.OPEN;
+        id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        orderStatus = OrderStatus.OPEN;
+        orderOpenTime = LocalDateTime.now();
     }
 
     public abstract double getExecutionPrice();

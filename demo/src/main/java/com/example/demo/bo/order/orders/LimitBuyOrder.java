@@ -1,5 +1,7 @@
 package com.example.demo.bo.order.orders;
 
+import java.time.LocalDateTime;
+
 import com.example.demo.bo.order.AbstractOrder;
 import com.example.demo.bo.order.interfaces.BuySide;
 import com.example.demo.bo.order.interfaces.LimitOrder;
@@ -23,6 +25,7 @@ public class LimitBuyOrder extends AbstractOrder implements LimitOrder, BuySide 
 
     @Override
     public void executeOrder() {
+        orderCloseTime = LocalDateTime.now();
         orderStatus = OrderStatus.CLOSE;
     }
 

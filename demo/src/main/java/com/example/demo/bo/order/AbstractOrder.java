@@ -22,6 +22,12 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
         this.quantity = quantity;
     }
 
+    protected AbstractOrder(long id, SymbolCode symbol, double quantity) {
+        this.id = id;
+        this.symbol = symbol;
+        this.quantity = quantity;
+    }
+
     protected AbstractOrder() {
 
     }

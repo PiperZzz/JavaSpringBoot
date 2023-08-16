@@ -5,8 +5,8 @@ public enum OrderType {
     MARKET_SELL,
     LIMIT_BUY,
     LIMIT_SELL,
-    STOP_BUY,
-    STOP_BUY_LIMIT,
-    STOP_SELL,
-    STOP_SELL_LIMIT,
+    STOP_MARKET_BUY,
+    STOP_MARKET_SELL,
+    STOP_LIMIT_BUY,
+    STOP_LIMIT_SELL,
 }

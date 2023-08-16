@@ -14,4 +14,5 @@ public class OrderRequest {
     private double lmitePrice;
     private double stopPrice;
     private double quantity;
+    private boolean isMarketOrder;
 }

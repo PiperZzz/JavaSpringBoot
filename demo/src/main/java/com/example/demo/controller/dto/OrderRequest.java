@@ -11,7 +11,7 @@ public class OrderRequest {
     private String symbolPair;
     private String orderType;
     private String orderDirection;
-    private double lmitePrice;
+    private double ExcutionPrice;
     private double stopPrice;
     private double quantity;
     private boolean isMarketOrder;

@@ -47,7 +47,7 @@ public class TradeController {
             throw new IllegalArgumentException("Invalid user");
         }
         
-        if (!orderRequest.isMarketOrder() &&  (orderRequest.getLmitePrice() <= 0)) {
+        if (!orderRequest.isMarketOrder() &&  (orderRequest.getExcutionPrice() <= 0)) {
             throw new IllegalArgumentException("Invalid limit price");
         }
 
@@ -55,7 +55,7 @@ public class TradeController {
             throw new IllegalArgumentException("Invalid quantity");
         }
 
-        double total = orderRequest.getLmitePrice() * orderRequest.getQuantity();
+        double total = orderRequest.getExcutionPrice() * orderRequest.getQuantity();
         List<Asset> assets = user.getWallet().getAssets();
         double assetAmount = assets.stream().filter(asset -> asset.getSymbol().equals(symbol)).mapToDouble(Asset::getAmount).sum(); //TODO double check
 
@@ -79,6 +79,6 @@ public class TradeController {
             throw new IllegalArgumentException("Invalid symbol");
         }
         User user = userRepository.findByUsername(username);
-        tradeService.cancelOrder(user, symbol, tradeRequest.getQuantity(), tradeRequest.getLmitePrice());
+        tradeService.cancelOrder(user, symbol, tradeRequest.getQuantity(), tradeRequest.getExcutionPrice());
     }
 }

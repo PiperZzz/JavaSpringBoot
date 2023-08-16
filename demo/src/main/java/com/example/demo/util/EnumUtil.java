@@ -22,4 +22,23 @@ public class EnumUtil {
         }
         return false;
     }
+
+    /**
+     * @param enumType
+     * @param targetValue
+     * @param <E> 
+     * @return actual enum value if enumType contains targetValue, otherwise null
+     */
+    public static <E extends Enum<E>> E getEnum(Class<E> enumType, String targetValue) {
+        if (enumType == null || targetValue == null) {
+            return null;
+        }
+
+        for (E enumConstant : enumType.getEnumConstants()) {
+            if (enumConstant.toString().equals(targetValue)) {
+                return enumConstant;
+            }
+        }
+        return null;
+    }
 }

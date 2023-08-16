@@ -12,11 +12,14 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.User;
 import com.example.demo.model.Wallet;
+import com.example.demo.util.EnumUtil;
 import com.example.demo.model.Asset;
+import com.example.demo.bo.order.AbstractOrder;
 import com.example.demo.controller.dto.OrderRequest;
 import com.example.demo.dao.AssetRepository;
 import com.example.demo.dao.UserOrderRepository;
 import com.example.demo.dao.WalletRepository;
+import com.example.demo.enums.OrderDirection;
 import com.example.demo.enums.OrderType;
 import com.example.demo.enums.SymbolCode;
 import com.example.demo.exception.InsufficientBalanceException;
@@ -31,7 +34,7 @@ public class TradeService {
     private final AssetRepository assetRepository;
     
     @Autowired
-    private Map<OrderType, OrderFactory> orderFactoryMap;
+    private final Map<OrderType, OrderFactory> orderFactoryMap;
 
     public TradeService(WalletRepository walletRepository, UserOrderRepository userOrderRepository, AssetRepository assetRepository, Map<OrderType, OrderFactory> orderFactoryMap) {
         this.walletRepository = walletRepository;
@@ -43,11 +46,18 @@ public class TradeService {
     public void createOrder(User user, OrderRequest orderRequest) {
         logger.info("Create Order for User: {}, Request: {}", user, orderRequest);
 
+        OrderType orderType = EnumUtil.getEnum(OrderType.class, orderRequest.getOrderType());
+        if (orderType == null) {
+            throw new IllegalArgumentException("Invalid order type");
+        }
 
-    }
+        AbstractOrder abstractOrder = orderFactoryMap.get(orderType).createOrder();
+        abstractOrder.setSymbolCode(EnumUtil.getEnum(SymbolCode.class, orderRequest.getSymbol()));
+        abstractOrder.setOrderDirection(EnumUtil.getEnum(OrderDirection.class, orderRequest.getOrderDirection()));
+        abstractOrder.setQuantity(orderRequest.getQuantity());
+        abstractOrder.setExcutionPrice(orderRequest.getExcutionPrice());
 
-    public void createMarketOrder(User user, OrderRequest orderRequest) {
-        logger.info("Create Market Order for User: {}, Request: {}", user, orderRequest);
+        //TODO pass the order to order book manager
 
     }
 

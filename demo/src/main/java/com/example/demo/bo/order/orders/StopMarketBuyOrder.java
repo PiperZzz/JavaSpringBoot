@@ -11,21 +11,12 @@ public class StopMarketBuyOrder extends AbstractOrder implements StopOrder, Mark
     private double limitPrice;
     private double stopPrice;
 
-    public StopMarketBuyOrder(long id, SymbolCode symbol, double price, double quantity) {
-        super(id, symbol, price, quantity);
-    }
-
-    public StopMarketBuyOrder(long id, SymbolCode symbol, double price, double quantity, double limitPrice) {
-        super(id, symbol, price, quantity);
-        this.limitPrice = limitPrice;
-    }
-
     public StopMarketBuyOrder() {
         super();
     }
 
     @Override
-    public double setExecutionPrice() {
+    public double getExecutionPrice() {
         return limitPrice;
     }
 

@@ -9,16 +9,12 @@ import com.example.demo.enums.SymbolCode;
 public class MarketBuyOrder extends AbstractOrder implements MarketOrder, BuySide {
     private double marketPrice;
 
-    public MarketBuyOrder(long id, SymbolCode symbol, double quantity) {
-        super(id, symbol, quantity);
-    }
-
     public MarketBuyOrder() {
         super();
     }
 
     @Override
-    public double setExecutionPrice() {
+    public double getExecutionPrice() {
         return marketPrice;
     }
 

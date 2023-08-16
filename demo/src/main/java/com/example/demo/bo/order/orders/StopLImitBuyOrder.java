@@ -11,21 +11,12 @@ public class StopLImitBuyOrder extends AbstractOrder implements StopOrder, Limit
     private double limitPrice;
     private double stopPrice;
 
-    public StopLImitBuyOrder(long id, SymbolCode symbol, double price, double quantity) {
-        super(id, symbol, price, quantity);
-    }
-
-    public StopLImitBuyOrder(long id, SymbolCode symbol, double price, double quantity, double limitPrice) {
-        super(id, symbol, price, quantity);
-        this.limitPrice = limitPrice;
-    }
-
     public StopLImitBuyOrder() {
         super();
     }
 
     @Override
-    public double setExecutionPrice() {
+    public double getExecutionPrice() {
         return limitPrice;
     }
 

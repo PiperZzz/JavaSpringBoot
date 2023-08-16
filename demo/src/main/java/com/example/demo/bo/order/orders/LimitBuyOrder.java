@@ -9,21 +9,12 @@ import com.example.demo.enums.SymbolCode;
 public class LimitBuyOrder extends AbstractOrder implements LimitOrder, BuySide {
     private double limitPrice;
 
-    public LimitBuyOrder(long id, SymbolCode symbol, double price, double quantity) {
-        super(id, symbol, price, quantity);
-    }
-
-    public LimitBuyOrder(long id, SymbolCode symbol, double price, double quantity, double limitPrice) {
-        super(id, symbol, price, quantity);
-        this.limitPrice = limitPrice;
-    }
-
     public LimitBuyOrder() {
         super();
     }
 
     @Override
-    public double setExecutionPrice() {
+    public double getExecutionPrice() {
         return limitPrice;
     }
 

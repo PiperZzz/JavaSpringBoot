@@ -14,25 +14,11 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
     private double quantity;
 
     //TODO abastrct buy and sell direction 
-
-    protected AbstractOrder(long id, SymbolCode symbol, double price, double quantity) {
-        this.id = id;
-        this.symbol = symbol;
-        this.price = price;
-        this.quantity = quantity;
-    }
-
-    protected AbstractOrder(long id, SymbolCode symbol, double quantity) {
-        this.id = id;
-        this.symbol = symbol;
-        this.quantity = quantity;
-    }
-
     protected AbstractOrder() {
 
     }
 
-    public abstract double setExecutionPrice();
+    public abstract double getExecutionPrice();
 
     public OrderDirection getOrderDirection() {
         return orderDirection;

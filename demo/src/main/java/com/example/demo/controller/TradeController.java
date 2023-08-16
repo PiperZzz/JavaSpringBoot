@@ -27,15 +27,21 @@ public class TradeController {
     @PostMapping("/create-order")
     public void createOrder(@RequestParam OrderRequest orderRequest) {
         //TODO Refactor this method for general order creation
-        //TODO user validation: 
         //TODO order validation: price range, quantity range, balance, symbol existence
-        //TODO exception handling
-        String username = orderRequest.getUsername();
+        
         String symbol = orderRequest.getSymbol();
         if (!EnumUtil.contains(SymbolCode.class, symbol)) {
             throw new IllegalArgumentException("Invalid symbol");
         }
+
+        String username = orderRequest.getUsername();
         User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new IllegalArgumentException("Invalid user");
+        }
+
+
+
         tradeService.createOrder(user, symbol, orderRequest.getQuantity(), orderRequest.getLmitePrice());
     }
 

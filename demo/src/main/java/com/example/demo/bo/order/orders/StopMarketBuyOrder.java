@@ -29,7 +29,7 @@ public class StopMarketBuyOrder extends AbstractOrder implements StopOrder, Mark
 
     @Override
     public void executeOrder() {
-        orderCloseTime = LocalDateTime.now();
+        orderCloseAt = LocalDateTime.now();
         orderStatus = OrderStatus.CLOSE;
     }
 
@@ -41,7 +41,7 @@ public class StopMarketBuyOrder extends AbstractOrder implements StopOrder, Mark
     @Override
     public void triggerStop() {
         isStopTriggered = true;
-        orderLastUpdateTime = LocalDateTime.now();
+        orderUpdateAt = LocalDateTime.now();
     }
 
     @Override

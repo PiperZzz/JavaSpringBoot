@@ -17,15 +17,15 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
     protected OrderStatus orderStatus;
     protected double quantity;
     protected double excutionPrice;
-    protected LocalDateTime orderOpenTime;
-    protected LocalDateTime orderCloseTime;
-    protected LocalDateTime orderLastUpdateTime;
+    protected LocalDateTime orderOpenAt;
+    protected LocalDateTime orderCloseAt;
+    protected LocalDateTime orderUpdateAt;
 
     //TODO remove unused constructors
     protected AbstractOrder(SymbolCode symbolCode, double quantity, double excutionPrice) {
         id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         orderStatus = OrderStatus.OPEN;
-        orderOpenTime = LocalDateTime.now();
+        orderOpenAt = LocalDateTime.now();
         this.symbolCode = symbolCode;
         this.quantity = quantity;
         this.excutionPrice = excutionPrice;
@@ -34,7 +34,7 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
     protected AbstractOrder(SymbolCode symbolCode, double quantity) {
         id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         orderStatus = OrderStatus.OPEN;
-        orderOpenTime = LocalDateTime.now();
+        orderOpenAt = LocalDateTime.now();
         this.quantity = quantity;
         this.symbolCode = symbolCode;
     }
@@ -42,7 +42,7 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
     protected AbstractOrder() {
         id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         orderStatus = OrderStatus.OPEN;
-        orderOpenTime = LocalDateTime.now();
+        orderOpenAt = LocalDateTime.now();
     }
 
     public abstract double getExecutionPrice();

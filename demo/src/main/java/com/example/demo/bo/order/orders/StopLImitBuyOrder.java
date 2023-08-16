@@ -29,7 +29,7 @@ public class StopLimitBuyOrder extends AbstractOrder implements StopOrder, Limit
 
     @Override
     public void executeOrder() {
-        orderCloseTime = LocalDateTime.now();
+        orderCloseAt = LocalDateTime.now();
         orderStatus = OrderStatus.CLOSE;
     }
 
@@ -41,7 +41,7 @@ public class StopLimitBuyOrder extends AbstractOrder implements StopOrder, Limit
     @Override
     public void triggerStop() {
         isStopTriggered = true;
-        orderLastUpdateTime = LocalDateTime.now();
+        orderUpdateAt = LocalDateTime.now();
     }
 
     @Override

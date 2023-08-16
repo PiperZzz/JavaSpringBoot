@@ -25,7 +25,7 @@ public class LimitBuyOrder extends AbstractOrder implements LimitOrder, BuySide 
 
     @Override
     public void executeOrder() {
-        orderCloseTime = LocalDateTime.now();
+        orderCloseAt = LocalDateTime.now();
         orderStatus = OrderStatus.CLOSE;
     }
 

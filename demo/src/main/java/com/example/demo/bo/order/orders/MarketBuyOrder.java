@@ -25,7 +25,7 @@ public class MarketBuyOrder extends AbstractOrder implements MarketOrder, BuySid
 
     @Override
     public void executeOrder() {
-        orderCloseTime = LocalDateTime.now();
+        orderCloseAt = LocalDateTime.now();
         orderStatus = OrderStatus.CLOSE;
     }
 

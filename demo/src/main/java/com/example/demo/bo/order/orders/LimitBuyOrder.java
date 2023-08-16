@@ -19,7 +19,7 @@ public class LimitBuyOrder extends AbstractOrder implements LimitOrder, BuySide 
     }
 
     @Override
-    public void setDirection() {
+    public void setOrderDirection() {
         this.orderDirection = OrderDirection.BUY;
     }
 

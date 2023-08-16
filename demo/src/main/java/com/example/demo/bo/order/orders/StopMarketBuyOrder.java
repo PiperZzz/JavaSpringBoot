@@ -21,7 +21,7 @@ public class StopMarketBuyOrder extends AbstractOrder implements StopOrder, Mark
     }
 
     @Override
-    public void setDirection() {
+    public void setOrderDirection() {
         this.orderDirection = OrderDirection.BUY;
     }
 

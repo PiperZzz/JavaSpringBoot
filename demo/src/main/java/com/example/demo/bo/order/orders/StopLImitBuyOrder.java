@@ -21,7 +21,7 @@ public class StopLImitBuyOrder extends AbstractOrder implements StopOrder, Limit
     }
 
     @Override
-    public void setDirection() {
+    public void setOrderDirection() {
         this.orderDirection = OrderDirection.BUY;
     }
 

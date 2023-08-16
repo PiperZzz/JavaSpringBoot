@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.controller.dto.TradeRequest;
+import com.example.demo.controller.dto.OrderRequest;
 import com.example.demo.dao.UserRepository;
 import com.example.demo.enums.SymbolCode;
 import com.example.demo.model.User;
@@ -25,7 +25,7 @@ public class TradeController {
     }
 
     @PostMapping("/create-order")
-    public void createOrder(@RequestParam TradeRequest tradeRequest) {
+    public void createOrder(@RequestParam OrderRequest tradeRequest) {
         //TODO Refactor this method for general order creation
         //TODO user validation: 
         //TODO order validation: price range, quantity range, balance, symbol existence
@@ -40,7 +40,7 @@ public class TradeController {
     }
 
     @PostMapping("/cancel-order")
-    public void cancel(@RequestParam TradeRequest tradeRequest) {
+    public void cancel(@RequestParam OrderRequest tradeRequest) {
         //TODO Refactor this method for general order cancellation
         String username = tradeRequest.getUsername();
         String symbol = tradeRequest.getSymbol();

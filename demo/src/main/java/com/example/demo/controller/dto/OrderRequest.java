@@ -2,14 +2,15 @@ package com.example.demo.controller.dto;
 
 import lombok.Data;
 @Data
-public class TradeRequest {
-    private String orderId;
-    private String targetOrderId;
+public class OrderRequest {
+    private String id;
+    private String targetId;
     private String username;
+    private String token;
     private String symbol;
     private String symbolPair;
-    private String type;
-    private String direction;
+    private String orderType;
+    private String orderDirection;
     private double lmitePrice;
     private double stopPrice;
     private double quantity;

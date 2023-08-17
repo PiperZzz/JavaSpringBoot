@@ -3,11 +3,11 @@ package com.example.demo.bo.order.orders;
 import java.time.LocalDateTime;
 
 import com.example.demo.bo.order.AbstractOrder;
-import com.example.demo.bo.order.interfaces.BuySide;
-import com.example.demo.bo.order.interfaces.LimitOrder;
+import com.example.demo.bo.order.interfaces.Limit;
+import com.example.demo.bo.order.interfaces.directions.Buy;
 import com.example.demo.enums.OrderStatus;
 
-public class LimitBuyOrder extends AbstractOrder implements LimitOrder, BuySide {
+public class LimitBuyOrder extends AbstractOrder implements Limit, Buy {
 
     public LimitBuyOrder() {
         super();

@@ -3,11 +3,11 @@ package com.example.demo.bo.order.orders;
 import java.time.LocalDateTime;
 
 import com.example.demo.bo.order.AbstractOrder;
-import com.example.demo.bo.order.interfaces.BuySide;
-import com.example.demo.bo.order.interfaces.MarketOrder;
+import com.example.demo.bo.order.interfaces.Market;
+import com.example.demo.bo.order.interfaces.directions.Buy;
 import com.example.demo.enums.OrderStatus;
 
-public class MarketBuyOrder extends AbstractOrder implements MarketOrder, BuySide {
+public class MarketBuyOrder extends AbstractOrder implements Market, Buy {
 
     public MarketBuyOrder() {
         super();

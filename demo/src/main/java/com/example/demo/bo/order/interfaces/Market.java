@@ -1,5 +1,5 @@
 package com.example.demo.bo.order.interfaces;
 
-public interface Market extends Order {
+public interface Market {
     void setExecutionPrice(double limitPrice);
 }

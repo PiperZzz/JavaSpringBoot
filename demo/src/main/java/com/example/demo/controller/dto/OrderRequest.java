@@ -11,8 +11,11 @@ public class OrderRequest {
     private String symbolPair;
     private String orderType;
     private String orderDirection;
-    private double ExcutionPrice;
+    private double excutionPrice;
     private double stopPrice;
+    private double limitPrice;
     private double quantity;
+    private long expirationTime;
     private boolean isMarketOrder;
+    private boolean isStopOrder;
 }

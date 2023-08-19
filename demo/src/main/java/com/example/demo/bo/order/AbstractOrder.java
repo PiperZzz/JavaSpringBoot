@@ -2,6 +2,7 @@ package com.example.demo.bo.order;
 
 import java.util.UUID;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import com.example.demo.enums.OrderDirection;
 import com.example.demo.enums.OrderStatus;
@@ -17,15 +18,18 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
     protected OrderStatus orderStatus;
     protected double quantity;
     protected double excutionPrice;
+    protected long expirationTime;
     protected LocalDateTime orderOpenAt;
     protected LocalDateTime orderCloseAt;
     protected LocalDateTime orderUpdateAt;
+    protected LocalDateTime orderExpirationAt;
 
     //TODO remove unused constructors
     protected AbstractOrder(SymbolCode symbolCode, double quantity, double excutionPrice) {
         id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         orderStatus = OrderStatus.OPEN;
         orderOpenAt = LocalDateTime.now();
+        orderExpirationAt = orderOpenAt.plus(expirationTime, ChronoUnit.MILLIS);
         this.symbolCode = symbolCode;
         this.quantity = quantity;
         this.excutionPrice = excutionPrice;
@@ -35,6 +39,7 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
         id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         orderStatus = OrderStatus.OPEN;
         orderOpenAt = LocalDateTime.now();
+        orderExpirationAt = orderOpenAt.plus(expirationTime, ChronoUnit.MILLIS);
         this.quantity = quantity;
         this.symbolCode = symbolCode;
     }
@@ -43,6 +48,7 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
         id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         orderStatus = OrderStatus.OPEN;
         orderOpenAt = LocalDateTime.now();
+        orderExpirationAt = orderOpenAt.plus(expirationTime, ChronoUnit.MILLIS);
     }
 
     public abstract double getExecutionPrice();

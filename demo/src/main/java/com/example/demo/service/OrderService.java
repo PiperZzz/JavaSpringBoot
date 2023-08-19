@@ -56,6 +56,7 @@ public class OrderService {
         abstractOrder.setOrderDirection(EnumUtil.getEnum(OrderDirection.class, orderRequest.getOrderDirection()));
         abstractOrder.setQuantity(orderRequest.getQuantity());
         abstractOrder.setExcutionPrice(orderRequest.getExcutionPrice());
+        abstractOrder.setExpirationTime(orderRequest.getExpirationTime());
 
         //TODO hand over the order to order book manager
 

@@ -67,6 +67,16 @@ public class OrderController {
             }
         }
 
+        if (orderRequest.isStopOrder() && orderRequest.getStopPrice() <= 0) {
+            throw new IllegalArgumentException("Invalid stop price");
+        }
+
+        if (orderRequest.getExpirationTime() < 0) {
+            throw new IllegalArgumentException("Invalid expiration time");
+        } else if (orderRequest.getExpirationTime() == 0) {
+            orderRequest.setExpirationTime(1000 * 60 * 60 * 24 * 7); //TODO default expiration time
+        }
+
         tradeService.createOrder(user, orderRequest);
     }
 

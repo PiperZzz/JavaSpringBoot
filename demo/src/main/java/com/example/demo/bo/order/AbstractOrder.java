@@ -64,8 +64,7 @@ public abstract class AbstractOrder implements Comparable<AbstractOrder> {
         } else if (this.excutionPrice > other.excutionPrice) {
             return -1;
         } else {
-            //TODO when same price, compare the time stamp
-            return Long.compare(this.id, other.id);
+            return this.orderOpenAt.compareTo(other.orderOpenAt);
         }
     }
 

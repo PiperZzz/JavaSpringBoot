@@ -1,39 +1,39 @@
 package com.example.demo.service;
 
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import org.springframework.stereotype.Service;
 
 import com.example.demo.bo.OrderBook;
+import com.example.demo.enums.SymbolCode;
 
 @Service
 public class OrderBookSweeper {
-    private OrderBook orderBook;
     private Timer timer;
 
-    public OrderBookSweeper(OrderBook orderBook) {
-        this.orderBook = orderBook;
+    public OrderBookSweeper() {
         timer = new Timer();
         scheduleOrderCleanupTask();
     }
 
     private void scheduleOrderCleanupTask() {
         TimerTask cleanupTask = new OrderCleanupTask();
-        // 每隔一定时间执行定时清理任务
-        timer.scheduleAtFixedRate(cleanupTask, 0, 1000); // 每秒执行一次示例
+        timer.scheduleAtFixedRate(cleanupTask, 0, 1000);
     }
 
     private class OrderCleanupTask extends TimerTask {
         @Override
         public void run() {
-            // 执行定时清理过期订单
-            orderBook.cleanupExpiredOrders();
+            Map<SymbolCode, OrderBook> orderBooks = OrderBookManager.getOrderBooks();
+            for (OrderBook orderBook : orderBooks.values()) {
+                orderBook.cleanupExpiredOrders();
+            }
         }
     }
 
     public void monitorChanges() {
-        // 监测订单簿变化并计算匹配
-        // ...
+
     }
 }

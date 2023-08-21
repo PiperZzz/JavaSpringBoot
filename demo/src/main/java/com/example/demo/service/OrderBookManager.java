@@ -25,4 +25,8 @@ public class OrderBookManager {
     public static OrderBook getOrderBook(SymbolCode symbolCode) {
         return orderBooks.get(symbolCode);
     }
+
+    public static Map<SymbolCode, OrderBook> getOrderBooks() {
+        return orderBooks;
+    }   
 }

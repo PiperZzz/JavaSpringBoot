@@ -41,21 +41,21 @@ public class OrderBook {
     }
 
     public void cleanupExpiredOrders() {
-            LocalDateTime currentTime = LocalDateTime.now();
-            
-            cleanupExpiredOrdersInQueue(buyOrders, currentTime);
-            cleanupExpiredOrdersInQueue(sellOrders, currentTime);
-        }
+        LocalDateTime currentTime = LocalDateTime.now();
+        
+        cleanupExpiredOrdersInQueue(buyOrders, currentTime);
+        cleanupExpiredOrdersInQueue(sellOrders, currentTime);
+    }
 
-        private void cleanupExpiredOrdersInQueue(PriorityQueue<AbstractOrder> orders, LocalDateTime currentTime) {
-            Iterator<AbstractOrder> iterator = orders.iterator();
+    private void cleanupExpiredOrdersInQueue(PriorityQueue<AbstractOrder> orders, LocalDateTime currentTime) {
+        Iterator<AbstractOrder> iterator = orders.iterator();
 
-            while (iterator.hasNext()) {
-                AbstractOrder order = iterator.next();
-                if (order.getOrderExpirationAt().isBefore(currentTime)) {
-                    iterator.remove();
-                    logger.info("Order {} expired", order.getId());
-                }
+        while (iterator.hasNext()) {
+            AbstractOrder order = iterator.next();
+            if (order.getOrderExpirationAt().isBefore(currentTime)) {
+                iterator.remove();
+                logger.info("Order {} expired", order.getId());
             }
         }
+    }
 }

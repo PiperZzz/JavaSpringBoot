@@ -31,8 +31,10 @@ public class OrderBookSweeper {
         }
     }
 
+    @Scheduled(fixedRate = 5000)
     public void pageOrders() {
-        //TODO page orders
+        //TODO move low priority orders to the low priority queue
+        //TODO move high priority orders to the high priority queue
     }
 
     @EventListener

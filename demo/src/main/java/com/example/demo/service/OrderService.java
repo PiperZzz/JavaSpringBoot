@@ -67,7 +67,7 @@ public class OrderService {
 
         Wallet wallet = walletRepository.findByUser(user);
         List<Asset> assets = assetRepository.findBySymbol(wallet);
-        Optional<Asset> result = assets.stream().filter(asset -> asset.getSymbol().equals(SymbolCode.valueOf(symbol))).findFirst();
+        Optional<Asset> result = assets.stream().filter(asset -> asset.getSymbolCode().equals(SymbolCode.valueOf(symbol))).findFirst();
         if (result.isPresent()) {
             Asset asset = result.get();
             if (asset.getAmount() < amount) {

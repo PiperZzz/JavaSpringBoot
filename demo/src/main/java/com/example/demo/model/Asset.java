@@ -25,7 +25,7 @@ public class Asset {
     private Wallet wallet;
 
     @Enumerated(EnumType.STRING)
-    private SymbolCode symbol;
+    private SymbolCode symbolCode;
 
     private double amount;
     private String address;

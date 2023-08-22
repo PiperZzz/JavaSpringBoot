@@ -46,18 +46,10 @@ public class OrderController {
         if (user == null) {
             throw new IllegalArgumentException("Invalid user");
         }
-        
-        if (!orderRequest.isMarketOrder() &&  (orderRequest.getExcutionPrice() <= 0)) {
-            throw new IllegalArgumentException("Invalid limit price");
-        }
-
-        if (orderRequest.getQuantity() <= 0) {
-            throw new IllegalArgumentException("Invalid quantity");
-        }
 
         double total = orderRequest.getExcutionPrice() * orderRequest.getQuantity();
         List<Asset> assets = user.getWallet().getAssets();
-        double assetAmount = assets.stream().filter(asset -> asset.getSymbol().equals(symbol)).mapToDouble(Asset::getAmount).sum(); //TODO double check
+        double assetAmount = assets.stream().filter(asset -> asset.getSymbolCode().toString().equals(symbol)).mapToDouble(Asset::getAmount).sum();
 
         if (!orderRequest.isMarketOrder()) {
             if (orderDirection.equals(OrderDirection.BUY.toString()) && total > user.getWallet().getBalance()) {
@@ -67,14 +59,12 @@ public class OrderController {
             }
         }
 
-        if (orderRequest.isStopOrder() && orderRequest.getStopPrice() <= 0) {
-            throw new IllegalArgumentException("Invalid stop price");
-        }
+        final int defaultExpirationTime = 1000 * 60 * 60 * 24 * 7;
 
         if (orderRequest.getExpirationTime() < 0) {
             throw new IllegalArgumentException("Invalid expiration time");
         } else if (orderRequest.getExpirationTime() == 0) {
-            orderRequest.setExpirationTime(1000 * 60 * 60 * 24 * 7); //TODO default expiration time
+            orderRequest.setExpirationTime(defaultExpirationTime);
         }
 
         tradeService.createOrder(user, orderRequest);

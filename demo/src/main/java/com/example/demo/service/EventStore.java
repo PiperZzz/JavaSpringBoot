@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.annotation.PostConstruct;
 
-import com.example.demo.bo.OrderEvent;
 import com.example.demo.enums.MessageTopic;
+import com.example.demo.event.OrderEvent;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,6 @@ public class EventStore {
     @PostConstruct
     public void testSaveEvent() {
         OrderEvent orderEvent = new OrderEvent();
-        orderEvent.setOrderOpenTime(LocalDateTime.now());
         kafkaTemplateObjectMsg.send(MessageTopic.ORDER_EVENT.name(), orderEvent);
     }
 

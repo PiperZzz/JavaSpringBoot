@@ -1,6 +1,7 @@
 package com.example.demo.bo.order;
 
 import java.util.UUID;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -11,7 +12,7 @@ import com.example.demo.enums.SymbolCode;
 import lombok.Data;
 
 @Data
-public abstract class AbstractOrder implements Comparable<AbstractOrder> {
+public abstract class AbstractOrder implements Comparable<AbstractOrder>, Serializable {
     protected long id;
     protected SymbolCode symbolCode;
     protected OrderDirection orderDirection;

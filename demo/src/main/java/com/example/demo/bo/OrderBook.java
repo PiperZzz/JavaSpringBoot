@@ -54,6 +54,13 @@ public class OrderBook {
         cleanupExpiredOrdersInQueue(sellOrders, currentTime);
     }
 
+    public void activateStopOrders() {
+        LocalDateTime currentTime = LocalDateTime.now();
+        
+        activateStopOrdersInQueue(buyOrders, currentTime);
+        activateStopOrdersInQueue(sellOrders, currentTime);
+    }
+
     private void cleanupExpiredOrdersInQueue(PriorityQueue<AbstractOrder> orders, LocalDateTime currentTime) {
         Iterator<AbstractOrder> iterator = orders.iterator();
 
@@ -64,5 +71,9 @@ public class OrderBook {
                 logger.info("Order {} expired", order.getId());
             }
         }
+    }
+
+    private void activateStopOrdersInQueue(PriorityQueue<AbstractOrder> orders, LocalDateTime currentTime) {
+        //TODO implement this method
     }
 }

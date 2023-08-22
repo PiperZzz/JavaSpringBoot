@@ -21,6 +21,18 @@ public class OrderBookSweeper {
         }
     }
 
+    @Scheduled(fixedRate = 1000)
+    public void activateStopOrders() {
+        Map<SymbolCode, OrderBook> orderBooks = OrderBookManager.getOrderBooks();
+        for (OrderBook orderBook : orderBooks.values()) {
+            orderBook.activateStopOrders();
+        }
+    }
+
+    public void pageOrders() {
+        //TODO page orders
+    }
+
     @EventListener
     public void updateOrderBook (OrderBookEvent orderBookEvent) {
         OrderBookManager.getOrderBook(orderBookEvent.getOrderBookSymbolCode());

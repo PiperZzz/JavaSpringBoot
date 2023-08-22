@@ -17,7 +17,10 @@ import com.example.demo.enums.OrderDirection;
 import com.example.demo.enums.SymbolCode;
 import com.example.demo.event.OrderBookEvent;
 
+import lombok.Data;
+
 @Component
+@Data
 public class OrderBook {
     private static final Logger logger = LoggerFactory.getLogger(OrderBook.class);
     @Autowired

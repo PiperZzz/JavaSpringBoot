@@ -56,15 +56,12 @@ public class OrderService {
         abstractOrder.setQuantity(orderRequest.getQuantity());
         abstractOrder.setExcutionPrice(orderRequest.getExcutionPrice());
         abstractOrder.setExpirationTime(orderRequest.getExpirationTime());
-
         //TODO hand over the order to order book manager
-
     }
 
     public void cancelOrder(User user, String symbol, double amount, double price) {
         logger.info("User {} Selling {} Amount of {} at Price {}", user, amount, symbol, price);
         //TODO Refactor this method for general order cancellation
-
         Wallet wallet = walletRepository.findByUser(user);
         List<Asset> assets = assetRepository.findBySymbol(wallet);
         Optional<Asset> result = assets.stream().filter(asset -> asset.getSymbolCode().equals(SymbolCode.valueOf(symbol))).findFirst();

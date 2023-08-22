@@ -1,11 +1,9 @@
 package com.example.demo.service;
 
-import java.time.LocalDateTime;
-
 import javax.annotation.PostConstruct;
 
 import com.example.demo.enums.MessageTopic;
-import com.example.demo.event.OrderEvent;
+import com.example.demo.event.OrderBookEvent;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -25,11 +23,11 @@ public class EventStore {
 
     @PostConstruct
     public void testSaveEvent() {
-        OrderEvent orderEvent = new OrderEvent();
+        OrderBookEvent orderEvent = new OrderBookEvent();
         kafkaTemplateObjectMsg.send(MessageTopic.ORDER_EVENT.name(), orderEvent);
     }
 
-    public void saveEvent(OrderEvent orderEvent) {
+    public void saveEvent(OrderBookEvent orderEvent) {
         kafkaTemplateObjectMsg.send(MessageTopic.ORDER_EVENT.name(), orderEvent);
     }
 }

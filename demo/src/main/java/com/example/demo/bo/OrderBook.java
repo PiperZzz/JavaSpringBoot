@@ -7,16 +7,21 @@ import java.util.PriorityQueue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.bo.order.AbstractOrder;
+import com.example.demo.enums.OrderBookEventType;
 import com.example.demo.enums.OrderDirection;
 import com.example.demo.enums.SymbolCode;
+import com.example.demo.event.OrderBookEvent;
 
 @Component
 public class OrderBook {
     private static final Logger logger = LoggerFactory.getLogger(OrderBook.class);
-
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
     private final SymbolCode symbolCode;
     private PriorityQueue<AbstractOrder> buyOrders = new PriorityQueue<>();
     private PriorityQueue<AbstractOrder> sellOrders = new PriorityQueue<>();
@@ -34,10 +39,12 @@ public class OrderBook {
         if (order.getOrderDirection().equals(OrderDirection.BUY)) {
             buyOrders.add(order);
         } else if (order.getOrderDirection().equals(OrderDirection.SELL)) {
-            sellOrders.add(order);
+            sellOrders.add(order);            
         } else {
             throw new IllegalArgumentException("Invalid order direction");
         }
+
+        applicationEventPublisher.publishEvent(new OrderBookEvent(order, OrderBookEventType.ADD, symbolCode));
     }
 
     public void cleanupExpiredOrders() {

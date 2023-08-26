@@ -8,11 +8,11 @@ import com.example.demo.bo.order.interfaces.Stop;
 import com.example.demo.bo.order.interfaces.directions.Buy;
 import com.example.demo.enums.OrderStatus;
 
-public class StopLimitBuyOrderO extends AbstractOrder implements Stop, Limit, Buy {
+public class StopLimitBuyOrder extends AbstractOrder implements Stop, Limit, Buy {
     private double stopPrice;
     private boolean isStopTriggered;
 
-    public StopLimitBuyOrderO() {
+    public StopLimitBuyOrder() {
         super();
         isStopTriggered = false;
     }
